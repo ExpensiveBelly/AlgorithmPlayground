@@ -15,7 +15,6 @@ dependencies {
     implementation 'io.arrow-kt:arrow-core:0.10.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'net.wuerl.kotlin:assertj-core-kotlin:0.2.1'
 }
 
 compileKotlin {

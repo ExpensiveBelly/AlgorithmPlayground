@@ -1,7 +1,9 @@
 package lazy
 
+import java.io.Serializable
 
-sealed class Result<out A>: Serializable {
+
+sealed class Result<out A> : Serializable {
 
     abstract fun mapEmpty(): Result<Any>
 
@@ -27,9 +29,9 @@ sealed class Result<out A>: Serializable {
             else -> try {
                 defaultValue()
             } catch (e: RuntimeException) {
-                Result.failure<A>(e)
+                failure<A>(e)
             } catch (e: Exception) {
-                Result.failure<A>(RuntimeException(e))
+                failure<A>(RuntimeException(e))
             }
         }
 
@@ -177,9 +179,9 @@ sealed class Result<out A>: Serializable {
             try {
                 Result(f())
             } catch (e: RuntimeException) {
-                Result.failure(e)
+                failure(e)
             } catch (e: Exception) {
-                Result.failure(e)
+                failure(e)
             }
 
         fun <T> of(predicate: (T) -> Boolean,
@@ -189,9 +191,9 @@ sealed class Result<out A>: Serializable {
                 if (predicate(value))
                     Result(value)
                 else
-                    Result.failure("Assertion failed for value $value with message: $message")
+                    failure("Assertion failed for value $value with message: $message")
             } catch (e: Exception) {
-                Result.failure(IllegalStateException("Exception while validating $value", e))
+                failure(IllegalStateException("Exception while validating $value", e))
             }
     }
 }

@@ -1,6 +1,6 @@
 package marcinmoskala
 
-import org.amshove.kluent.shouldEqual
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 /**
@@ -13,7 +13,7 @@ class KotlinAcademyTest {
     fun group_by_is_the_opposite_of_flatmap() {
         val names = listOf("John", "Simon", "Andrew", "Peter")
 
-        names.groupBy { it.first() }.flatMap { it.value } shouldEqual names
+        assertEquals(names, names.groupBy { it.first() }.flatMap { it.value })
     }
 
     @Test
@@ -32,28 +32,28 @@ class KotlinAcademyTest {
         }
 
         tailrec fun fibTailRec(n: Int, prev: Int, next: Int): Int =
-                when (n) {
-                    0 -> prev
-                    1 -> next
-                    else -> fibTailRec(n - 1, next, next + prev)
-                }
+            when (n) {
+                0 -> prev
+                1 -> next
+                else -> fibTailRec(n - 1, next, next + prev)
+            }
 
         fun fibTailRecStart(n: Int) = fibTailRec(n, 0, 1)
 
         fun fibFunctional(n: Int) = (2 until n).fold(1 to 1) { (f, s), _ -> s to (f + s) }.second
 
         val testData = mapOf(
-                10 to 55,
-                20 to 6765,
-                30 to 832040,
-                40 to 102334155)
+            10 to 55,
+            20 to 6765,
+            30 to 832040,
+            40 to 102334155
+        )
 
         testData.forEach { (n, result) ->
-            result shouldEqual
-                    fibRecursive(n) shouldEqual
-                    fibIterative(n) shouldEqual
-                    fibTailRecStart(n) shouldEqual
-                    fibFunctional(n)
+            assertEquals(result, fibRecursive(n))
+            assertEquals(result, fibIterative(n))
+            assertEquals(result, fibTailRecStart(n))
+            assertEquals(result, fibFunctional(n))
         }
     }
 
@@ -62,20 +62,22 @@ class KotlinAcademyTest {
         fun Iterable<Int>.sum(): Int = fold(0) { acc, i -> acc + i }
         fun Iterable<Int>.product(): Int = fold(1) { acc, i -> acc * i }
         fun <T, R> Iterable<T>.map(transform: (T) -> R): List<R> = fold(emptyList()) { acc, i -> acc + transform(i) }
-        fun <T, R> Iterable<T>.flatMap(transform: (T) -> List<R>): List<R> = fold(emptyList()) { acc, i -> acc + transform(i) }
-        fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> = fold(emptyList()) { acc, i -> if (predicate(i)) acc + (i) else acc }
+        fun <T, R> Iterable<T>.flatMap(transform: (T) -> List<R>): List<R> =
+            fold(emptyList()) { acc, i -> acc + transform(i) }
+
+        fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> =
+            fold(emptyList()) { acc, i -> if (predicate(i)) acc + (i) else acc }
+
         fun <T> Iterable<T>.joinToString(separator: String = " ,", tr: (T) -> String = { "$it" }): String =
-                foldIndexed("") { index, acc, i -> acc + (if (index != 0) separator else "") + tr(i) }
+            foldIndexed("") { index, acc, i -> acc + (if (index != 0) separator else "") + tr(i) }
 
         val list = listOf(1, 2, 3, 4, 5)
 
-        list.sum() shouldEqual 15
-        list.product() shouldEqual 120
-        list.map { it * 2 } shouldEqual listOf(2, 4, 6, 8, 10)
-        list.filter { it % 2 == 0 } shouldEqual listOf(2, 4)
-        list.joinToString(separator = "") shouldEqual "12345"
-
-        //TODO: Why do we need to flatten here?
-        list.flatMap { listOf(it, it + 10) } shouldEqual listOf(1, 11, 2, 12, 3, 13, 4, 14, 5, 15)
+        assertEquals(15, list.sum())
+        assertEquals(120, list.product())
+        assertEquals(listOf(2, 4, 6, 8, 10), list.map { it * 2 })
+        assertEquals(listOf(2, 4), list.filter { it % 2 == 0 })
+        assertEquals("12345", list.joinToString(separator = ""))
+        assertEquals(listOf(1, 11, 2, 12, 3, 13, 4, 14, 5, 15), list.flatMap { listOf(it, it + 10) })
     }
 }

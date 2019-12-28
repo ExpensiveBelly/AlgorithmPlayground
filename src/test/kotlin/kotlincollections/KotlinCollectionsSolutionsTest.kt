@@ -1,8 +1,8 @@
 package kotlincollections
 
+import junit.framework.TestCase.assertEquals
 import kotlincollections.KotlinCollectionsSolutions.Person
 import kotlincollections.KotlinCollectionsSolutions.Student
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
@@ -17,107 +17,132 @@ class KotlinCollectionsSolutionsTest {
 
     @Test
     fun `accumulate names in a list`() {
-        assertThat(exercises.`accumulate names in a list`()).isEqualTo(listOf("David", "Max", "Peter", "Pamela"))
+        assertEquals(listOf("David", "Max", "Peter", "Pamela"), exercises.`accumulate names in a list`())
     }
 
     @Test
     fun `find people of legal age, output formatted string`() {
-        assertThat(exercises.`find people of legal age, output formatted string`()).isEqualTo("In Germany Max and Peter and Pamela are of legal age.")
+        assertEquals(
+            "In Germany Max and Peter and Pamela are of legal age.",
+            exercises.`find people of legal age, output formatted string`()
+        )
     }
 
     @Test
     fun `group people by age, print age and names together`() {
-        assertThat(exercises.`group people by age, print age and names together`()).isEqualTo(mapOf(18 to "Max", 23 to "Peter;Pamela", 12 to "David"))
+        assertEquals(
+            mapOf(18 to "Max", 23 to "Peter;Pamela", 12 to "David"),
+            exercises.`group people by age, print age and names together`()
+        )
     }
 
     @Test
     fun `lazily iterate Doubles, map to Int, map to String, print each`() {
-        assertThat(exercises.`lazily iterate Doubles, map to Int, map to String, print each`()).isEqualTo("a1, a2, a3")
+        assertEquals("a1, a2, a3", exercises.`lazily iterate Doubles, map to Int, map to String, print each`())
     }
 
     @Test
     fun `counting items in a list after filter is applied`() {
-        assertThat(exercises.`counting items in a list after filter is applied`()).isEqualTo(2)
+        assertEquals(2, exercises.`counting items in a list after filter is applied`())
     }
 
     @Test
     fun `convert elements to strings and concatenate them, separated by commas`() {
-        assertThat(exercises.`convert elements to strings and concatenate them, separated by commas`()).isEqualTo("laptop, monitor, mouse, keyboard")
+        assertEquals(
+            "laptop, monitor, mouse, keyboard",
+            exercises.`convert elements to strings and concatenate them, separated by commas`()
+        )
     }
 
     @Test
     fun `compute sum of salaries of employee`() {
-        assertThat(exercises.`compute sum of salaries of employee`()).isEqualTo(10_000)
+        assertEquals(10_000, exercises.`compute sum of salaries of employee`())
     }
 
     @Test
     fun `compute sum of salaries by department`() {
-        assertThat(exercises.`compute sum of salaries by department`()).isEqualTo(mapOf("IT" to 3_000, "Management" to 5_000, "HR" to 2_000))
+        assertEquals(
+            mapOf("IT" to 3_000, "Management" to 5_000, "HR" to 2_000),
+            exercises.`compute sum of salaries by department`()
+        )
     }
 
     @Test
     fun `partition students into passing and failing`() {
-        assertThat(exercises.`partition students into passing and failing`()).isEqualTo(Pair(
+        assertEquals(
+            Pair(
                 listOf(Student(10), Student(5)),
-                listOf(Student(3), Student(4))))
+                listOf(Student(3), Student(4))
+            ), exercises.`partition students into passing and failing`()
+        )
     }
 
     @Test
     fun `names of male members`() {
-        assertThat(exercises.`names of male members`()).isEqualTo(listOf("David", "Max", "Peter"))
+        assertEquals(listOf("David", "Max", "Peter"), exercises.`names of male members`())
     }
 
     @Test
     fun `group names of members in roster by gender`() {
-        assertThat(exercises.`group names of members in roster by gender`()).isEqualTo(
-                mapOf(Person.Sex.MALE to listOf("David", "Max", "Peter"),
-                        Person.Sex.FEMALE to listOf("Pamela")))
+        assertEquals(
+            mapOf(
+                Person.Sex.MALE to listOf("David", "Max", "Peter"),
+                Person.Sex.FEMALE to listOf("Pamela")
+            ),
+            exercises.`group names of members in roster by gender`()
+        )
     }
 
     @Test
     fun `filter a list to another list`() {
-        assertThat(exercises.`filter a list to another list with items that start with o`()).isEqualTo(emptyList<String>())
+        assertEquals(emptyList<String>(), exercises.`filter a list to another list with items that start with o`())
     }
 
     @Test
     fun `finding shortest string a list`() {
-        assertThat(exercises.`finding shortest string a list`()).isEqualTo("tray")
+        assertEquals("tray", exercises.`finding shortest string a list`())
     }
 
     @Test
     fun `iterate an array, map the values, calculate the average`() {
-        assertThat(exercises.`iterate an array, map the values, calculate the average`()).isEqualTo(5.0)
+        assertEquals(5.0, exercises.`iterate an array, map the values, calculate the average`())
     }
 
     @Test
     fun `lazily iterate a list of strings, map the values, convert to Int, find max`() {
-        assertThat(exercises.`lazily iterate a list of strings, map the values, convert to Int, find max`()).isEqualTo(3)
+        assertEquals(3, exercises.`lazily iterate a list of strings, map the values, convert to Int, find max`())
     }
 
     @Test
     fun `filter, upper case, then sort a list`() {
-        assertThat(exercises.`filter, upper case, then sort a list`()).isEqualTo(listOf("C1", "C2"))
+        assertEquals(listOf("C1", "C2"), exercises.`filter, upper case, then sort a list`())
     }
 
     @Test
     fun `map names, join together with delimiter`() {
-        assertThat(exercises.`map names, join together with delimiter`()).isEqualTo("DAVID | MAX | PETER | PAMELA")
+        assertEquals("DAVID | MAX | PETER | PAMELA", exercises.`map names, join together with delimiter`())
     }
 
     @Test
     fun `reorder person list according to new ids`() {
-        assertThat(exercises.`reorder person list according to person_ids`(listOf(4, 2, 3, 1))).isEqualTo(
-                listOf(
-                        Person(id = 4, name = "Pamela", age = 23, gender = Person.Sex.FEMALE),
-                        Person(id = 2, name = "Max", age = 18, gender = Person.Sex.MALE),
-                        Person(id = 3, name = "Peter", age = 23, gender = Person.Sex.MALE),
-                        Person(id = 1, name = "David", age = 12, gender = Person.Sex.MALE)))
+        assertEquals(
+            listOf(
+                Person(id = 4, name = "Pamela", age = 23, gender = Person.Sex.FEMALE),
+                Person(id = 2, name = "Max", age = 18, gender = Person.Sex.MALE),
+                Person(id = 3, name = "Peter", age = 23, gender = Person.Sex.MALE),
+                Person(id = 1, name = "David", age = 12, gender = Person.Sex.MALE)
+            )
+            , exercises.`reorder person list according to person_ids`(listOf(4, 2, 3, 1))
+        )
 
-        assertThat(exercises.`reorder person list according to person_ids`(listOf(3, 4, 1, 2))).isEqualTo(
-                listOf(
-                        Person(id = 3, name = "Peter", age = 23, gender = Person.Sex.MALE),
-                        Person(id = 4, name = "Pamela", age = 23, gender = Person.Sex.FEMALE),
-                        Person(id = 1, name = "David", age = 12, gender = Person.Sex.MALE),
-                        Person(id = 2, name = "Max", age = 18, gender = Person.Sex.MALE)))
+        assertEquals(
+            listOf(
+                Person(id = 3, name = "Peter", age = 23, gender = Person.Sex.MALE),
+                Person(id = 4, name = "Pamela", age = 23, gender = Person.Sex.FEMALE),
+                Person(id = 1, name = "David", age = 12, gender = Person.Sex.MALE),
+                Person(id = 2, name = "Max", age = 18, gender = Person.Sex.MALE)
+            )
+            , exercises.`reorder person list according to person_ids`(listOf(3, 4, 1, 2))
+        )
     }
 }
