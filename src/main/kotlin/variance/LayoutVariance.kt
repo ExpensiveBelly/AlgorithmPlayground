@@ -19,8 +19,8 @@ fun main(args: Array<String>) {
     h = vertical.rotate().rotate()
     */
 
-    println("Horizontal rotated is " + v)
-    println("Vertical rotated is " + h)
+    println("Horizontal rotated is $v")
+    println("Vertical rotated is $h")
 }
 
 interface Orientation {
