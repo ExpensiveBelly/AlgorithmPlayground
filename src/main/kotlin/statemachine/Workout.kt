@@ -1,9 +1,8 @@
-package state
+package statemachine
 
 import kotlin.properties.Delegates
 
 sealed class WorkoutState {
-
     data class PrepareState(val exercise: Exercise) : WorkoutState()
     data class ExerciseState(val exercise: Exercise) : WorkoutState()
     object DoneState : WorkoutState()

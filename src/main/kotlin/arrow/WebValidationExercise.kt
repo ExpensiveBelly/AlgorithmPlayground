@@ -7,7 +7,6 @@ import arrow.core.extensions.nonemptylist.semigroup.semigroup
 import arrow.core.extensions.option.applicative.applicative
 import arrow.core.extensions.validated.applicative.applicative
 
-
 private sealed class ValidationError {
     object InvalidMail : ValidationError()
     object InvalidPhoneNumber : ValidationError()
@@ -51,7 +50,7 @@ fun main() {
         errors.handleInvalid().all.forEach { println(it) }
     }, { (email, phone) -> listOf(email, phone).forEach { println(it) } })
 
-    val fx: Either<ValidationError, Int> = Either.fx<ValidationError, Int> {
+    val fx: Either<ValidationError, Int> = Either.fx {
         val (a: Int) = Either.Right(1)
         val d: Int = a
         val (b) = Either.Right(1 + a)
@@ -64,5 +63,6 @@ fun main() {
 
     val either: Either<NonEmptyList<Int>, Tuple2<Int, Int>> =
         Either.applicative<Nel<Int>>().tupled(Either.Right(1), Either.right(2)).fix()
-    Either.applicative<Int>().map(Either.Right(1), Either.Right(2)) { it }.fix()
+    val fix: Either<Throwable, Tuple2<Int, Int>> =
+        Either.applicative<Throwable>().map(Either.Right(1), Either.Right(2)) { it }.fix()
 }
