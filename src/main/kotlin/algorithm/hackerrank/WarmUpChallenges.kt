@@ -2,26 +2,13 @@ package algorithm.hackerrank
 
 
 fun main() {
-//    println(sockMerchant(3, arrayOf(1, 1, 3, 1, 2, 1, 3, 3, 3, 3)))
-//    println(countingValleys(8, "UDDDUDUU"))
-//    println(jumpingOnClouds(arrayOf(0, 0, 1, 0, 0, 1, 0)))
-//    println(jumpingOnClouds(arrayOf(0, 0, 0, 0, 1, 0)))
+    println(sockMerchant(3, arrayOf(1, 1, 3, 1, 2, 1, 3, 3, 3, 3)))
+    println(countingValleys(8, "UDDDUDUU"))
+    println(jumpingOnClouds(arrayOf(0, 0, 1, 0, 0, 1, 0)))
+    println(jumpingOnClouds(arrayOf(0, 0, 0, 0, 1, 0)))
 
-//    println(repeatedString("aba", 10))
-//    println(repeatedString("a", 1000000000000))
-
-    println(
-        hourglassSum(
-            arrayOf(
-                arrayOf(1, 1, 1, 0, 0, 0),
-                arrayOf(0, 1, 0, 0, 0, 0),
-                arrayOf(1, 1, 1, 0, 0, 0),
-                arrayOf(0, 0, 2, 4, 4, 0),
-                arrayOf(0, 0, 0, 2, 0, 0),
-                arrayOf(0, 0, 1, 2, 4, 0)
-            )
-        )
-    )
+    println(repeatedString("aba", 10))
+    println(repeatedString("a", 1000000000000))
 }
 
 /**
@@ -91,43 +78,3 @@ fun repeatedString(s: String, n: Long): Long {
 }
 
 private fun countA(s: String) = s.count { it == 'a' }
-
-/*
-https://www.hackerrank.com/challenges/2d-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
- */
-
-/*
-//1 1 1 0 0 0
-//0 1 0 0 0 0
-//1 1 1 0 0 0
-//0 0 2 4 4 0
-//0 0 0 2 0 0
-//0 0 1 2 4 0
- */
-fun hourglassSum(arr: Array<Array<Int>>): Int {
-    val hourGlassMatrix: List<List<List<List<Int>>>> = arr.map {
-        (0 until 4).map { x ->
-            it.toList().drop(x).take(3).chunked(3)
-        }
-    }
-    val sixteenHourglassMatrixes: List<List<List<List<List<Int>>>>> = (0 until 4).map { x ->
-        (0 until 6).map { y ->
-            hourGlassMatrix[y][x]
-        }.chunked(3)
-    }
-
-    return (flatten(sixteenHourglassMatrixes) as List<Int>).chunked(3).chunked(3).map { it.first().sum() + it[2][1] + it.last().sum() }.max()!!
-}
-
-@Suppress("UNCHECKED_CAST")
-tailrec fun flatten(list: List<Any>): List<Any> {
-    if (list.all { it !is List<*> }) return list
-
-    val ret = mutableListOf<Any?>()
-    list.forEach { any ->
-        if (any is List<*>) ret.addAll(any)
-        else ret.add(any)
-    }
-
-    return flatten(ret as List<Any>)
-}
