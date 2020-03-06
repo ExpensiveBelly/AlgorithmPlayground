@@ -41,9 +41,15 @@ fun hourglassSum(arr: Array<Array<Int>>): Int {
     }
 
     val sixteenHourglassMatrixes = (0 until 4).map { x ->
-        (0 until 6).map { y ->
+        (0 until 3).map { y ->
 //            println("x: $x y: $y hourGlassMatrix: ${hourGlassMatrix[y][x]}")
-            hourGlassMatrix[y][x]
+            (0 until 6).map { z ->
+                try {
+                    hourGlassMatrix[y + z][x]
+                } catch (e: IndexOutOfBoundsException) {
+                    null
+                }
+            }.mapNotNull { it }
         }
     }
 
