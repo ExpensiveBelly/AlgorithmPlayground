@@ -7,9 +7,9 @@ fun main() {
                 arrayOf(1, 1, 1, 0, 0, 0),
                 arrayOf(0, 1, 0, 0, 0, 0),
                 arrayOf(1, 1, 1, 0, 0, 0),
-                arrayOf(0, 0, 2, 4, 4, 0),
-                arrayOf(0, 0, 0, 2, 0, 0),
-                arrayOf(0, 0, 1, 2, 4, 0)
+                arrayOf(0, 9, 2, -4 - 4, 0),
+                arrayOf(0, 0, 0, -2, 0, 0),
+                arrayOf(0, 0, -1, -2, -4, 0)
             )
         )
     )
@@ -26,6 +26,15 @@ https://www.hackerrank.com/challenges/2d-array/problem?h_l=interview&playlist_sl
 //0 0 2 4 4 0
 //0 0 0 2 0 0
 //0 0 1 2 4 0
+ */
+
+/*
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 9 2 -4 -4 0
+0 0 0 -2 0 0
+0 0 -1 -2 -4 0
  */
 fun hourglassSum(arr: Array<Array<Int>>): Int {
     val hourGlassMatrix = arr.map {
@@ -54,13 +63,15 @@ fun hourglassSum(arr: Array<Array<Int>>): Int {
 
     val chunked = (flatten(sixteenHourglassMatrixes) as List<Int>).chunked(3).chunked(3)
 
+    println()
     println("chunked")
-    chunked.forEachIndexed { index, list ->
-        println("index: $index list: ${list.size} $list")
-    }
-
     return chunked
-        .map { it.first().sum() + it[2][1] + it.last().sum() }.max()!!
+        .mapIndexed { index, list ->
+            println("index: $index list: ${list.size} $list")
+            list.first().sum()
+                .also { print("first: ${list.first().sum()} ") } + list[1][1].also { print("mid: $it") } + list.last()
+                .sum().also { println(" last: $it") }
+        }.also { println(it) }.max()!!
 }
 
 fun <T : Any> tryOrNull(body: () -> T?): T? = try {
