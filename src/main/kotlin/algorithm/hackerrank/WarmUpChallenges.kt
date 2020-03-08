@@ -15,7 +15,7 @@ fun main() {
  * https://www.hackerrank.com/challenges/sock-merchant/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
 
-fun sockMerchant(n: Int, ar: Array<Int>): Int =
+private fun sockMerchant(n: Int, ar: Array<Int>): Int =
     ar.toList().groupBy { it }
         .map { it.value.count() / 2 }
         .sum()
@@ -25,7 +25,7 @@ fun sockMerchant(n: Int, ar: Array<Int>): Int =
 * https://www.hackerrank.com/challenges/counting-valleys/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
 
-fun countingValleys(n: Int, s: String): Int {
+private fun countingValleys(n: Int, s: String): Int {
     return s.fold(Counter(0, 0)) { acc: Counter, c: Char ->
         when (c) {
             'D' -> acc.copy(count = acc.count - 1)
@@ -47,11 +47,11 @@ private data class Counter(val count: Int, val valleyCount: Int)
 https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
 
-fun jumpingOnClouds(c: Array<Int>): Int {
+private fun jumpingOnClouds(c: Array<Int>): Int {
     return jumpingOnCloudsTailRec(c.toList(), 0)
 }
 
-tailrec fun jumpingOnCloudsTailRec(c: List<Int>, stepCount: Int): Int {
+private tailrec fun jumpingOnCloudsTailRec(c: List<Int>, stepCount: Int): Int {
     return when {
         c.size == 1 -> stepCount
         c.canJumpTwo() -> jumpingOnCloudsTailRec(c.drop(2), stepCount + 1)
