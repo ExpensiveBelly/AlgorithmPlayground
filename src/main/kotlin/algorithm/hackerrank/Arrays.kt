@@ -31,9 +31,8 @@ fun hourglassSum(arr: Array<Array<Int>>): Int {
     val hourGlassMatrix = arr.map {
         (0 until 5).map { x ->
             it.toList().drop(x).take(3).windowed(3)
-        }.filter { it.isNotEmpty() }
+        }.filter { it.isNotEmpty() }.flatten()
     }
-//    println(hourGlassMatrix)
 
     println("hourGlass")
     hourGlassMatrix.forEachIndexed { index, list ->
@@ -42,24 +41,32 @@ fun hourglassSum(arr: Array<Array<Int>>): Int {
 
     val sixteenHourglassMatrixes = (0 until 4).map { x ->
         (0 until 3).map { y ->
-//            println("x: $x y: $y hourGlassMatrix: ${hourGlassMatrix[y][x]}")
             (0 until 6).map { z ->
-                try {
-                    hourGlassMatrix[y + z][x]
-                } catch (e: IndexOutOfBoundsException) {
-                    null
-                }
+                tryOrNull { hourGlassMatrix[y + z][x] }
             }.mapNotNull { it }
         }
-    }
+    }.flatten().map { if (it.size == 6) it else it.take(3) }
 
     println("sixteenHourglassMatrixes")
     sixteenHourglassMatrixes.forEachIndexed { index, list ->
         println("index: $index list: ${list.size} $list")
     }
 
-    return (flatten(sixteenHourglassMatrixes) as List<Int>).chunked(3).chunked(3)
+    val chunked = (flatten(sixteenHourglassMatrixes) as List<Int>).chunked(3).chunked(3)
+
+    println("chunked")
+    chunked.forEachIndexed { index, list ->
+        println("index: $index list: ${list.size} $list")
+    }
+
+    return chunked
         .map { it.first().sum() + it[2][1] + it.last().sum() }.max()!!
+}
+
+fun <T : Any> tryOrNull(body: () -> T?): T? = try {
+    body()
+} catch (e: Exception) {
+    null
 }
 
 @Suppress("UNCHECKED_CAST")
