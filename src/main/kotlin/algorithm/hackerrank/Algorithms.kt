@@ -1,16 +1,42 @@
 package algorithm.hackerrank
 
-fun main() {
-//    println(jumpingOnClouds(arrayOf(1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1), 19))
-    println(findDigits(12))
+import java.math.BigInteger
+
+private data class DistanceAndMessage(val distanceToMouse: Int, val message: String)
+
+fun catAndMouse(x: Int, y: Int, z: Int): String {
+    val catA = DistanceAndMessage(abs(x - z), "Cat A")
+    val catB = DistanceAndMessage(abs(y - z), "Cat B")
+
+    return when {
+        catA.distanceToMouse == catB.distanceToMouse -> "Mouse C"
+        catA.distanceToMouse > catB.distanceToMouse -> catB.message
+        else -> catA.message
+    }
 }
 
+fun abs(a: Int): Int {
+    return if (a < 0) -a else a
+}
+
+fun extraLongFactorials(n: Int): BigInteger {
+    return n.factorial()
+}
+
+private fun Int.factorial(): BigInteger {
+    return factorialInternal(this, BigInteger.ONE)
+}
+
+private tailrec fun factorialInternal(n: Int, result: BigInteger): BigInteger = if (n == 0) result
+else factorialInternal(n - 1, result.times(BigInteger.valueOf(n.toLong())))
+
 fun findDigits(n: Int): Int {
-    return n.toString().toCharArray().count { number ->
-        val i = n.rem(number.toInt())
-        println("n: $n it: $number rem: $i")
-        println(i)
-        i == 0
+    return n.toString().toCharArray().count {
+        try {
+            n.rem(Integer.parseInt(it.toString())) == 0
+        } catch (e: ArithmeticException) {
+            false
+        }
     }
 }
 

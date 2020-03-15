@@ -1,31 +1,19 @@
 package algorithm.hackerrank
 
-
-fun main() {
-    println(sockMerchant(3, arrayOf(1, 1, 3, 1, 2, 1, 3, 3, 3, 3)))
-    println(countingValleys(8, "UDDDUDUU"))
-    println(jumpingOnClouds(arrayOf(0, 0, 1, 0, 0, 1, 0)))
-    println(jumpingOnClouds(arrayOf(0, 0, 0, 0, 1, 0)))
-
-    println(repeatedString("aba", 10))
-    println(repeatedString("a", 1000000000000))
-}
-
 /**
  * https://www.hackerrank.com/challenges/sock-merchant/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
 
-private fun sockMerchant(n: Int, ar: Array<Int>): Int =
+fun sockMerchant(n: Int, ar: Array<Int>): Int =
     ar.toList().groupBy { it }
         .map { it.value.count() / 2 }
         .sum()
-
 
 /*
 * https://www.hackerrank.com/challenges/counting-valleys/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
 
-private fun countingValleys(n: Int, s: String): Int {
+fun countingValleys(n: Int, s: String): Int {
     return s.fold(Counter(0, 0)) { acc: Counter, c: Char ->
         when (c) {
             'D' -> acc.copy(count = acc.count - 1)
@@ -47,7 +35,7 @@ private data class Counter(val count: Int, val valleyCount: Int)
 https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
  */
 
-private fun jumpingOnClouds(c: Array<Int>): Int {
+fun jumpingOnClouds(c: Array<Int>): Int {
     return jumpingOnCloudsTailRec(c.toList(), 0)
 }
 

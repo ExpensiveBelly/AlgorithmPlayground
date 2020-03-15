@@ -1,41 +1,9 @@
 package algorithm.hackerrank
 
-fun main() {
-    println(
-        hourglassSum(
-            arrayOf(
-                arrayOf(1, 1, 1, 0, 0, 0),
-                arrayOf(0, 1, 0, 0, 0, 0),
-                arrayOf(1, 1, 1, 0, 0, 0),
-                arrayOf(0, 9, 2, -4 - 4, 0),
-                arrayOf(0, 0, 0, -2, 0, 0),
-                arrayOf(0, 0, -1, -2, -4, 0)
-            )
-        )
-    )
-}
-
 /*
 https://www.hackerrank.com/challenges/2d-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
  */
 
-/*
-//1 1 1 0 0 0
-//0 1 0 0 0 0
-//1 1 1 0 0 0
-//0 0 2 4 4 0
-//0 0 0 2 0 0
-//0 0 1 2 4 0
- */
-
-/*
-1 1 1 0 0 0
-0 1 0 0 0 0
-1 1 1 0 0 0
-0 9 2 -4 -4 0
-0 0 0 -2 0 0
-0 0 -1 -2 -4 0
- */
 fun hourglassSum(arr: Array<Array<Int>>): Int {
     val hourGlassMatrix = arr.map {
         (0 until 5).map { x ->
