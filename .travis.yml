@@ -9,7 +9,7 @@ branches:
   only:
     - solutions
 os:
-  - linux
+- linux
 cache:
 directories:
   - $HOME/.gradle
