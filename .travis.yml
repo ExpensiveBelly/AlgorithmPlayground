@@ -7,7 +7,7 @@ jdk:
 # whitelist
 branches:
   only:
-    - solutions
+    - master
 os:
 - linux
 cache:
