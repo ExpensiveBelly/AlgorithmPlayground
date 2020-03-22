@@ -57,3 +57,22 @@ private tailrec fun jumpingOnCloudsInternal(c: Array<Int>, k: Int, pos: Int, ene
 }
 
 private fun Array<Int>.energyToDeductFor(nextPosition: Int) = if (this[nextPosition] == 1) 2 else 0
+
+
+/*
+https://www.hackerrank.com/challenges/picking-numbers/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
+ */
+
+fun pickingNumbers(a: Array<Int>): Int {
+    return a.toList()
+        .distinct()
+        .map { number ->
+            number to (a.filterNot { abs(it - number) > 1 }).groupingBy { it }.eachCount()
+        }
+        .maxBy { (first, second) ->
+            sum(first, second)
+        }?.let { (number, map) -> sum(number, map) } ?: 0
+}
+
+private fun sum(number: Int, map: Map<Int, Int>) =
+    map.getValue(number) + (map.filterKeys { it != number }.maxBy { it.value }?.value ?: 0)
