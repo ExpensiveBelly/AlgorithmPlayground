@@ -1,6 +1,7 @@
 package algorithm.hackerrank
 
 import java.math.BigInteger
+import java.util.stream.Collectors
 
 private data class DistanceAndMessage(val distanceToMouse: Int, val message: String)
 
@@ -76,3 +77,73 @@ fun pickingNumbers(a: Array<Int>): Int {
 
 private fun sum(number: Int, map: Map<Int, Int>) =
     map.getValue(number) + (map.filterKeys { it != number }.maxBy { it.value }?.value ?: 0)
+
+/*
+https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
+ */
+
+fun climbingLeaderboard2(scores: Array<Int>, alice: Array<Int>): Array<Int> {
+    return alice.map { number: Int ->
+        ((scores + number).distinct().sortedDescending().withIndex().find { it.value == number }?.index ?: 0) + 1
+    }.toTypedArray()
+}
+
+fun climbingLeaderboard3(scores: Array<Int>, alice: Array<Int>): Array<Int> {
+    val scoresDistinct = scores.distinct()
+    return alice.toList().stream().parallel()
+        .map { number ->
+            (scoresDistinct.partition { it > number }.first.size) + 1
+        }.collect(Collectors.toList()).toTypedArray()
+}
+
+fun climbingLeaderboard4(scores: Array<Int>, alice: Array<Int>): Array<Int> {
+    val scoresDistinct = scores.distinct()
+    return alice.map { number ->
+        var found = false
+        var i = 0
+        while (!found) {
+            if (i == scoresDistinct.size || number >= scoresDistinct[i]) {
+                found = true
+            } else {
+                i += 1
+            }
+        }
+        i + 1
+    }.toTypedArray()
+}
+
+//climbingLeaderboard(arrayOf(100, 100, 50, 40, 40, 20, 10), arrayOf(5, 25, 50, 120))
+//arrayOf(6, 5, 4, 2, 1),
+
+fun climbingLeaderboard(scores: Array<Int>, alice: Array<Int>): Array<Int> {
+    val scoresSet = emptySet<Int>().toMutableSet()
+    val result: Array<Int> = Array(alice.size) { -1 }
+    var scoresIndex = 0
+    var aliceIndex = alice.size - 1
+    while (aliceIndex >= 0) {
+        if (alice[aliceIndex] >= scores[scoresIndex]) {
+            result[aliceIndex] = scoresSet.size + 1
+            aliceIndex -= 1
+        } else {
+            scoresSet += scores[scoresIndex]
+            if (scoresIndex < scores.size - 1) scoresIndex += 1
+            else {
+                result[aliceIndex] = scoresSet.size + 1
+                aliceIndex -= 1
+            }
+        }
+    }
+    return result
+}
+
+fun permutationEquation(p: Array<Int>): Array<Int> {
+    return p.withIndex().map { indexedValue ->
+        compose(function(p), function(p)).invoke(indexedValue.index + 1)
+    }.toTypedArray()
+}
+
+private fun function(p: Array<Int>): (Int) -> Int = { p.indexOf(it) + 1 }
+
+private fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C {
+    return { x -> f(g(x)) }
+}

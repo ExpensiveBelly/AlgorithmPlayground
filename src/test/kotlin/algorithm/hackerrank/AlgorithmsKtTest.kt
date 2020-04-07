@@ -1,8 +1,8 @@
 package algorithm.hackerrank
 
 import Resources
+import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
-import org.junit.Ignore
 import org.junit.Test
 import java.math.BigInteger
 
@@ -40,6 +40,31 @@ class AlgorithmsKtTest {
         assertEquals(3, pickingNumbers(arrayOf(4, 6, 5, 3, 3, 1)))
         val ints = Resources.resourceAsList("pickingNumbers.txt").joinToString().split(" ").map { it.toInt() }
         assertEquals(22, pickingNumbers(ints.toTypedArray()))
+    }
+
+    @Test
+    fun `climbing leaderboard`() {
+        assertArrayEquals(
+            arrayOf(6, 4, 2, 1),
+            climbingLeaderboard(arrayOf(100, 100, 50, 40, 40, 20, 10), arrayOf(5, 25, 50, 120))
+        )
+        assertArrayEquals(
+            arrayOf(6, 5, 4, 2, 1),
+            climbingLeaderboard(arrayOf(100, 90, 90, 80, 75, 60), arrayOf(50, 65, 77, 90, 102))
+        )
+    }
+
+    @Test
+    fun `permutation equation`() {
+        assertArrayEquals(
+            arrayOf(2, 3, 1),
+            permutationEquation(arrayOf(2, 3, 1))
+        )
+
+        assertArrayEquals(
+            arrayOf(1, 3, 5, 4, 2),
+            permutationEquation(arrayOf(4, 3, 5, 1, 2))
+        )
     }
 }
 
