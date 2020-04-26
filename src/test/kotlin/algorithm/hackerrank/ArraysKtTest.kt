@@ -1,11 +1,13 @@
 package algorithm.hackerrank
 
-import org.junit.Assert.assertEquals
+import junit.framework.TestCase.assertEquals
+import org.junit.Assert.assertArrayEquals
+import org.junit.Ignore
 import org.junit.Test
 
 class ArraysKtTest {
 
-    @Test
+    @Ignore
     fun hourglass() {
         assertEquals(
             13, hourglassSum(
@@ -32,5 +34,21 @@ class ArraysKtTest {
                 )
             )
         )
+    }
+
+    @Ignore
+    fun `rotate left`() {
+        assertArrayEquals(arrayOf(5, 1, 2, 3, 4), rotLeft(arrayOf(1, 2, 3, 4, 5), 4))
+    }
+
+    @Test
+    fun `minimum bribe`() {
+        minimumBribes(arrayOf(2, 1, 5, 3, 4))
+        minimumBribes(arrayOf(2, 5, 1, 3, 4))
+//        1, 2, 3, 4, 5, 6, 7, 8
+//        3, 1, 2, 4, 5, 6, 7, 8
+//        2, 1, 3, 4, 5, 6, 7, 8
+
+        minimumBribes(arrayOf(1, 2, 5, 3, 7, 8, 6, 4))
     }
 }
