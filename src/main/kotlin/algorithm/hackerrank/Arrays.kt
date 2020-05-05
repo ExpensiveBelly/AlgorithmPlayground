@@ -93,9 +93,11 @@ fun minimumBribesTimeout(q: Array<Int>): Unit {
     })
 }
 
+private fun Int.toZeroIndexBased() = minus(1)
+
 //2, 1, 5, 3, 4
 //1, 2, 5, 3, 7, 8, 6, 4
-fun minimumBribes(q: Array<Int>): Unit {
+fun minimumBribesIterative(q: Array<Int>): Unit {
     var totalBribes = 0;
 
     var expectedFirst = 1;
@@ -128,7 +130,36 @@ fun minimumBribes(q: Array<Int>): Unit {
     println(totalBribes);
 }
 
-private fun Int.toZeroIndexBased() = minus(1)
+fun minimumBribes(q: Array<Int>): Unit {
+    minimumBribesTailRec(q, pos = 0, totalBribes = 0, expected = Triple(1, 2, 3))
+}
+
+tailrec fun minimumBribesTailRec(array: Array<Int>, pos: Int, totalBribes: Int, expected: Triple<Int, Int, Int>) {
+    when (val value = if (pos < array.size) array[pos] else null) {
+        expected.first -> minimumBribesTailRec(
+            array,
+            pos + 1,
+            totalBribes,
+            expected.copy(expected.second, expected.third, expected.third + 1)
+        )
+        expected.second -> minimumBribesTailRec(
+            array,
+            pos + 1,
+            totalBribes + 1,
+            expected.copy(second = expected.third, third = expected.third + 1)
+        )
+        expected.third -> minimumBribesTailRec(
+            array,
+            pos + 1,
+            totalBribes + 2,
+            expected.copy(third = expected.third + 1)
+        )
+        else -> {
+            println(if (value == null) totalBribes else "Too chaotic")
+        }
+    }
+}
+
 
 private fun minimumBribeslsmingSolution(q: Array<Int>) {
     var ans = 0

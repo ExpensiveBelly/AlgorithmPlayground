@@ -147,3 +147,17 @@ private fun function(p: Array<Int>): (Int) -> Int = { p.indexOf(it) + 1 }
 private fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C {
     return { x -> f(g(x)) }
 }
+
+/*
+https://www.hackerrank.com/challenges/append-and-delete/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign&h_r=next-challenge&h_v=zen
+ */
+
+// "hackerhappy", "hackerrank", 9
+// "hackerhappy", "hacker", 9
+// "aba", "aba", 7
+// "aba", "ab", 7
+fun appendAndDelete(s: String, t: String, k: Int): String {
+    val minCharsToAppend = t.length - t.commonPrefixWith(s).length
+    val minCharsToRemove = s.length - s.commonPrefixWith(t).length
+    return if (k > t.length * 2 || (k % 2 == (minCharsToAppend + minCharsToRemove) % 2) && k >= (minCharsToAppend + minCharsToRemove)) "Yes" else "No"
+}

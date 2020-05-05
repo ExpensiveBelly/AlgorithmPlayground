@@ -66,5 +66,24 @@ class AlgorithmsKtTest {
             permutationEquation(arrayOf(4, 3, 5, 1, 2))
         )
     }
+
+    @Test
+    fun `append and delete`() {
+        assertEquals("Yes", appendAndDelete("hackerhappy", "hackerrank", 9))
+        assertEquals("Yes", appendAndDelete("hackerhappy", "hacker", 9))
+        assertEquals("Yes", appendAndDelete("aba", "aba", 7))
+        assertEquals("No", appendAndDelete("ashley", "ash", 2))
+        assertEquals("Yes", appendAndDelete("aaaaaaaaaa", "aaaaa", 7))
+        assertEquals("No", appendAndDelete("y", "yu", 2))
+        assertEquals("No", appendAndDelete("abc", "abc", 1))
+        assertEquals("No", appendAndDelete("peek", "seeker", 3))
+        assertEquals(
+            "No", appendAndDelete(
+                "asdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv",
+                "bsdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcvasdfqwertyuighjkzxcv",
+                100
+            )
+        )
+    }
 }
 
