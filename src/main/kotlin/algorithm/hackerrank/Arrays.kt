@@ -130,6 +130,8 @@ fun minimumBribesIterative(q: Array<Int>): Unit {
     println(totalBribes);
 }
 
+//2, 1, 5, 3, 4
+//1, 2, 5, 3, 7, 8, 6, 4
 fun minimumBribes(q: Array<Int>): Unit {
     minimumBribesTailRec(q, pos = 0, totalBribes = 0, expected = Triple(1, 2, 3))
 }
