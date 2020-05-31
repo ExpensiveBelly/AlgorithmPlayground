@@ -71,7 +71,7 @@ https://www.hackerrank.com/challenges/separate-the-numbers/problem
 //9899100
 //999100010001
 //919293
-fun separateNumbers(s: String): String {
+fun separateNumbersRaw(s: String): String {
     if (s.isEmpty() || s.length < 2) return "NO"
 
     var numberOfDigits = 1
@@ -101,4 +101,33 @@ fun separateNumbers(s: String): String {
         }
     }
     return if (isIncreasingNumber) "YES $currentNumber" else "NO"
+}
+/*
+https://www.hackerrank.com/rest/contests/master/challenges/separate-the-numbers/hackers/alfard/download_solution
+ */
+
+fun separateNumbers(s: String): String {
+    val matches = (1..s.length / 2).asSequence()
+        .map { s.substring(0, it) }
+        .map { it.toLong() }
+        .map { x -> x to (0..30).map { x + it } }/*.also { println(it.toList()) }*/
+        .filter { (_, v) -> (2..30).any { (v.subList(0, it).joinToString("").also { println(it) } == s) } }
+
+    return when (matches.firstOrNull()) {
+        null -> "NO"
+        else -> "YES ${matches.first().first}"
+    }
+}
+
+/*
+https://www.hackerrank.com/challenges/funny-string/problem?h_r=next-challenge&h_v=legacy
+ */
+
+// Complete the funnyString function below.
+fun funnyString(s: String): String {
+    val asciiValues = s.toCharArray().map { it.toInt() }
+    val asciiValuesReverse = s.reversed().toCharArray().map { it.toInt() }
+    val adjacent = asciiValues.zipWithNext().map { Math.abs(it.first - it.second) }
+    val adjacentReverse = asciiValuesReverse.zipWithNext().map { Math.abs(it.first - it.second) }
+    return if (adjacent == adjacentReverse) "Funny" else "Not Funny"
 }

@@ -1,11 +1,12 @@
 package algorithm.hackerrank
 
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 
 class StringsKtTest {
 
-    @Test
+    @Ignore
     fun superReducedString() {
         assertEquals("abd", superReducedString("aaabccddd"))
         assertEquals("abda", superReducedString("aaabccdddaaa"))
@@ -13,7 +14,7 @@ class StringsKtTest {
         assertEquals("Empty String", superReducedString("baab"))
     }
 
-    @Test
+    @Ignore
     fun separateNumbers() {
         assertEquals("YES 1", separateNumbers("1234"))
         assertEquals("YES 9", separateNumbers("91011"))
@@ -46,5 +47,11 @@ class StringsKtTest {
         assertEquals("NO", separateNumbers("78798081828384858687888990918293"))
         assertEquals("YES 95", separateNumbers("9596979899100101102103104105106"))
         assertEquals("NO", separateNumbers("9596979899100101102103104195106 "))
+    }
+
+    @Test
+    fun funnyString() {
+        assertEquals("Funny", funnyString("acxz"))
+        assertEquals("Not Funny", funnyString("bcxz"))
     }
 }
