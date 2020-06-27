@@ -1,5 +1,6 @@
 package algorithm.hackerrank
 
+import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
@@ -53,5 +54,19 @@ class StringsKtTest {
     fun funnyString() {
         assertEquals("Funny", funnyString("acxz"))
         assertEquals("Not Funny", funnyString("bcxz"))
+    }
+
+    @Test
+    fun gemstones() {
+        assertEquals(2, gemstones(arrayOf("abcdde", "baccd", "eeabg")))
+    }
+
+    @Test
+    fun weightedUniformStrings() {
+        assertArrayEquals(
+            arrayOf(
+                "Yes", "Yes", "Yes", "Yes", "No", "No"
+            ), weightedUniformStrings("abccddde", arrayOf(1, 3, 12, 5, 9, 10))
+        )
     }
 }

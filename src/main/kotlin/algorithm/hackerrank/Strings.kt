@@ -131,3 +131,59 @@ fun funnyString(s: String): String {
     val adjacentReverse = asciiValuesReverse.zipWithNext().map { Math.abs(it.first - it.second) }
     return if (adjacent == adjacentReverse) "Funny" else "Not Funny"
 }
+
+/*
+https://www.hackerrank.com/challenges/gem-stones/problem?h_r=next-challenge&h_v=legacy&h_r=next-challenge&h_v=zen
+ */
+
+fun gemstones(arr: Array<String>) = arr.toList().zipWithNext()
+    .map {
+        it.first.toCharArray().intersect(it.second.toCharArray().toList()).size
+    }.min()
+
+
+/*
+https://www.hackerrank.com/challenges/weighted-uniform-string/problem
+ */
+
+private val alphabet: String = "abcdefghijklmnopqrstuvwxyz"
+
+/*
+abccddde
+1
+3
+12
+5
+9
+10
+
+This is not good enough in terms of per
+ */
+
+fun weightedUniformStrings1(s: String, queries: Array<Int>): Array<String> {
+    val map =
+        s.toCharArray().toList().pack().map { it.mapIndexed { index, c -> (alphabet.indexOf(c) + 1) * (index + 1) } }
+            .flatten()
+    return queries.map { if (map.contains(it)) "Yes" else "No" }.toTypedArray()
+}
+
+private tailrec fun List<Char>.pack(result: List<List<Char>> = emptyList()): List<List<Char>> =
+    if (isEmpty()) result
+    else {
+        val sublist = takeWhile { it == first() }
+        this@pack.drop(sublist.size).pack(result + listOf(sublist))
+    }
+
+fun weightedUniformStrings(s: String, queries: Array<Int>): Array<String> {
+    val weights = mutableSetOf<Int>()
+    var lastItem: Pair<Char, Int>? = null
+    s.forEach { c ->
+        lastItem = (lastItem?.let { (character, ocurrences) ->
+            if (character != c) c.toInitialOcurrence() else c to (ocurrences + 1)
+        } ?: (c.toInitialOcurrence())).also { (_, occurrences) -> weights.add(c.toWeight() * occurrences) }
+    }
+    return queries.map { if (weights.contains(it)) "Yes" else "No" }.toTypedArray()
+}
+
+private fun Char.toInitialOcurrence() = this to 1
+private fun Char.toWeight() = (this - 'a') + 1
