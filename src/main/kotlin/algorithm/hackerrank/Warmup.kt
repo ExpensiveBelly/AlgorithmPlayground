@@ -11,7 +11,7 @@ https://www.hackerrank.com/challenges/diagonal-difference/problem
 9 8 9
  */
 
-fun diagonalDifference(arr: Array<Array<Int>>): Int {
+fun diagonalDifferenceOldSchool(arr: Array<Array<Int>>): Int {
     var i = 0
     var j = 0
     var firstDiagonal = 0
@@ -24,4 +24,8 @@ fun diagonalDifference(arr: Array<Array<Int>>): Int {
         j += 1
     }
     return Math.abs(firstDiagonal - secondDiagonal)
+}
+
+fun diagonalDifference(arr: Array<Array<Int>>): Int {
+    return Math.abs(arr.indices.sumBy { indice -> arr[indice][indice] - arr[indice][arr.size - 1 - indice] })
 }
