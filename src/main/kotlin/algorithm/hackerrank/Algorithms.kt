@@ -161,3 +161,18 @@ fun appendAndDelete(s: String, t: String, k: Int): String {
     val minCharsToRemove = s.length - s.commonPrefixWith(t).length
     return if (k > t.length * 2 || (k % 2 == (minCharsToAppend + minCharsToRemove) % 2) && k >= (minCharsToAppend + minCharsToRemove)) "Yes" else "No"
 }
+
+/*
+https://www.hackerrank.com/challenges/grading/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
+ */
+
+fun gradingStudents(grades: Array<Int>): Array<Int> {
+    return grades.map { grade ->
+        when {
+            grade >= 38 && Math.abs((grade - grade.closestPowerOf5())) < 3 -> grade.closestPowerOf5()
+            else -> grade
+        }
+    }.toTypedArray()
+}
+
+fun Int.closestPowerOf5() = 5 * Math.ceil(((this.toDouble() / 5))).toInt()
