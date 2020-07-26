@@ -29,6 +29,7 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.0")
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }
 
 compileKotlin {

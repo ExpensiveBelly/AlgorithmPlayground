@@ -187,3 +187,11 @@ fun weightedUniformStrings(s: String, queries: Array<Int>): Array<String> {
 
 private fun Char.toInitialOcurrence() = this to 1
 private fun Char.toWeight() = (this - 'a') + 1
+
+/*
+https://www.hackerrank.com/challenges/simple-array-sum/problem
+ */
+
+fun simpleArraySum(ar: Array<Int>): Int {
+    return ar.sum()
+}
