@@ -175,4 +175,12 @@ fun gradingStudents(grades: Array<Int>): Array<Int> {
     }.toTypedArray()
 }
 
-fun Int.closestPowerOf5() = 5 * Math.ceil(((this.toDouble() / 5))).toInt()
+private fun Int.closestPowerOf5() = 5 * Math.ceil(((this.toDouble() / 5))).toInt()
+
+/*
+https://www.hackerrank.com/challenges/birthday-cake-candles/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
+ */
+
+fun birthdayCakeCandles(ar: Array<Int>): Int {
+    return ar.groupingBy { it }.eachCount().maxBy { it.value }?.value ?: 0
+}

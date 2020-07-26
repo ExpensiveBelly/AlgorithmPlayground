@@ -90,5 +90,10 @@ class AlgorithmsKtTest {
     fun gradingStudents() {
         assertArrayEquals(arrayOf(75, 67, 40, 33), gradingStudents(arrayOf(73, 67, 38, 33)))
     }
+
+    @Test
+    fun birthdayCakeCandles() {
+        assertEquals(2, birthdayCakeCandles(arrayOf(3, 2, 1, 3)))
+    }
 }
 
