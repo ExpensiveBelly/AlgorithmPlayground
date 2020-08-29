@@ -180,3 +180,36 @@ private fun minimumBribeslsmingSolution(q: Array<Int>) {
     println(ans)
 }
 
+/*
+ * https://www.hackerrank.com/challenges/minimum-swaps-2/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
+ */
+
+//4, 3, 1, 2
+
+// Complete the minimumSwaps function below.
+fun minimumSwaps(arr: Array<Int>): Int {
+    var count = 0
+    if (arr.isEmpty()) return count
+    else {
+        var i = 0
+        loop@ while (true) {
+            when {
+                i == arr.size -> break@loop
+                arr[i] == i + 1 -> {
+                    i++
+                    continue@loop
+                }
+                else -> {
+                    arr.swap(i, arr[i] - 1)
+                    count++
+                }
+            }
+        }
+    }
+    return count
+}
+
+private fun <T> Array<T>.swap(a: Int, b: Int) {
+    set(a, get(b).also { set(b, get(a)) })
+}
+
