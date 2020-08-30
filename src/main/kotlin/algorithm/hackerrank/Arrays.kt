@@ -189,20 +189,17 @@ private fun minimumBribeslsmingSolution(q: Array<Int>) {
 // Complete the minimumSwaps function below.
 fun minimumSwaps(arr: Array<Int>): Int {
     var count = 0
-    if (arr.isEmpty()) return count
-    else {
-        var i = 0
-        loop@ while (true) {
-            when {
-                i == arr.size -> break@loop
-                arr[i] == i + 1 -> {
-                    i++
-                    continue@loop
-                }
-                else -> {
-                    arr.swap(i, arr[i] - 1)
-                    count++
-                }
+    var i = 0
+    loop@ while (true) {
+        when {
+            i == arr.size -> break@loop
+            arr[i] == i + 1 -> {
+                i++
+                continue@loop
+            }
+            else -> {
+                arr.swap(i, arr[i] - 1)
+                count++
             }
         }
     }
