@@ -8,6 +8,7 @@ interface RequestOperations : DaoOperations, NetworkOperations, DomainMapper {
     fun Index.fetchUser(): Single<User> =
         queryUser().toUserFromDatabase()
             .onErrorResumeNext { requestUser().toUserFromNetwork() }
+            .toObservable().replay(1).refCount().firstOrError()
 }
 
 
