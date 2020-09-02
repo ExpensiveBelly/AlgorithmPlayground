@@ -31,3 +31,23 @@ fun diagonalDifferenceOldSchool(arr: Array<Array<Int>>): Int {
 fun diagonalDifference(arr: Array<Array<Int>>): Int {
     return Math.abs(arr.indices.sumBy { indice -> arr[indice][indice] - arr[indice][arr.size - 1 - indice] })
 }
+
+/**
+ * https://www.hackerrank.com/challenges/compare-the-triplets/problem
+ */
+fun compareTriplets(a: Array<Int>, b: Array<Int>): Array<Int> {
+    val (alice, bob) = a.zip(b).map { (it.first - it.second).sign }.fold(Pair(0, 0), { acc: Pair<Int, Int>, i: Int ->
+        when {
+            i > 0 -> acc.copy(first = acc.first.inc())
+            i < 0 -> acc.copy(second = acc.second.inc())
+            else -> acc
+        }
+    })
+    return arrayOf(alice, bob)
+}
+
+/**
+https://www.hackerrank.com/challenges/a-very-big-sum/problem
+ */
+
+fun aVeryBigSum(ar: Array<Long>): Long = ar.sum()
