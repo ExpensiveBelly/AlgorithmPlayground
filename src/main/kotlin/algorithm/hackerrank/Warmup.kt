@@ -1,5 +1,7 @@
 package algorithm.hackerrank
 
+import kotlin.math.sign
+
 
 /*
 https://www.hackerrank.com/challenges/diagonal-difference/problem
