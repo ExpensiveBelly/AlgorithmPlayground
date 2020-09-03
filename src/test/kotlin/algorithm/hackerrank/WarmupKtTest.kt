@@ -21,4 +21,9 @@ class WarmupKtTest {
     fun aVeryBigSum() {
         assertEquals(5000000015L, aVeryBigSum(arrayOf(1000000001, 1000000002, 1000000003, 1000000004, 1000000005)))
     }
+
+    @Test
+    fun plusMinus() {
+        plusMinus(arrayOf(-4, 3, -9, 0, 4, 1))
+    }
 }

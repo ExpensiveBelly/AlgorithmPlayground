@@ -1,5 +1,6 @@
 package algorithm.hackerrank
 
+import java.math.RoundingMode
 import kotlin.math.sign
 
 
@@ -36,13 +37,14 @@ fun diagonalDifference(arr: Array<Array<Int>>): Int {
  * https://www.hackerrank.com/challenges/compare-the-triplets/problem
  */
 fun compareTriplets(a: Array<Int>, b: Array<Int>): Array<Int> {
-    val (alice, bob) = a.zip(b).map { (it.first - it.second).sign }.fold(Pair(0, 0), { acc: Pair<Int, Int>, i: Int ->
-        when {
-            i > 0 -> acc.copy(first = acc.first.inc())
-            i < 0 -> acc.copy(second = acc.second.inc())
-            else -> acc
-        }
-    })
+    val (alice, bob) = a.zip(b) { a, b -> (a - b).sign }
+        .fold(Pair(0, 0), { acc: Pair<Int, Int>, i: Int ->
+            when {
+                i > 0 -> acc.copy(first = acc.first.inc())
+                i < 0 -> acc.copy(second = acc.second.inc())
+                else -> acc
+            }
+        })
     return arrayOf(alice, bob)
 }
 
@@ -51,3 +53,23 @@ https://www.hackerrank.com/challenges/a-very-big-sum/problem
  */
 
 fun aVeryBigSum(ar: Array<Long>): Long = ar.sum()
+
+
+/**
+https://www.hackerrank.com/challenges/plus-minus/
+ */
+
+fun plusMinus(arr: Array<Int>): Unit {
+    println(
+        arr.fold(Triple(0, 0, 0), { acc: Triple<Int, Int, Int>, i: Int ->
+            when {
+                i > 0 -> acc.copy(first = acc.first.inc())
+                i < 0 -> acc.copy(second = acc.second.inc())
+                else -> acc.copy(third = acc.third.inc())
+            }
+        }).toList().zip(listOf(RoundingMode.CEILING, RoundingMode.FLOOR, RoundingMode.CEILING))
+        { number, roundingMode ->
+            number.toBigDecimal().divide(arr.size.toBigDecimal(), 6, roundingMode)
+        }.joinToString("\n")
+    )
+}
