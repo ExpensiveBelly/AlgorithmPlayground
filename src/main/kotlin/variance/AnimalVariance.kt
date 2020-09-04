@@ -24,6 +24,7 @@ class AnimalVariance {
         val contravariantList: MutableList<in Animal> = mutableListOf<Any>() // In Java: List<? super Animal>
 //        val animal: Animal = contravariantList[0]    // Compilation error - list can store other objects than Animals as well
         contravariantList.add(Animal()) // Ok
+        contravariantList.add(Lion()) // Ok
     }
 
     fun producer() {
