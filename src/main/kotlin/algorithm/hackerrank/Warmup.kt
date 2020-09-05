@@ -37,7 +37,7 @@ fun diagonalDifference(arr: Array<Array<Int>>): Int {
  * https://www.hackerrank.com/challenges/compare-the-triplets/problem
  */
 fun compareTriplets(a: Array<Int>, b: Array<Int>): Array<Int> {
-    val (alice, bob) = a.zip(b) { a, b -> (a - b).sign }
+    val (alice, bob) = a.zip(b) { x, y -> (x - y).sign }
         .fold(Pair(0, 0), { acc: Pair<Int, Int>, i: Int ->
             when {
                 i > 0 -> acc.copy(first = acc.first.inc())
@@ -59,7 +59,7 @@ fun aVeryBigSum(ar: Array<Long>): Long = ar.sum()
 https://www.hackerrank.com/challenges/plus-minus/
  */
 
-fun plusMinus(arr: Array<Int>): Unit {
+fun plusMinus(arr: Array<Int>) {
     println(
         arr.fold(Triple(0, 0, 0), { acc: Triple<Int, Int, Int>, i: Int ->
             when {
@@ -72,4 +72,16 @@ fun plusMinus(arr: Array<Int>): Unit {
             number.toBigDecimal().divide(arr.size.toBigDecimal(), 6, roundingMode)
         }.joinToString("\n")
     )
+}
+
+/**
+ * https://www.hackerrank.com/challenges/staircase
+ */
+
+fun staircase(n: Int) {
+    repeat(n) {
+        repeat(n - it - 1) { print(" ") }
+        repeat(it + 1) { print("#") }
+        println()
+    }
 }

@@ -26,4 +26,9 @@ class WarmupKtTest {
     fun plusMinus() {
         plusMinus(arrayOf(-4, 3, -9, 0, 4, 1))
     }
+
+    @Test
+    fun staircase() {
+        staircase(5)
+    }
 }
