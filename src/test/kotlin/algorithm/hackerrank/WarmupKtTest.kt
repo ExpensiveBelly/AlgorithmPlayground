@@ -31,4 +31,10 @@ class WarmupKtTest {
     fun staircase() {
         staircase(5)
     }
+
+    @Test
+    fun miniMaxSum() {
+        miniMaxSum(arrayOf(1, 3, 5, 7, 9))
+        miniMaxSum(arrayOf(1, 2, 3, 4, 5))
+    }
 }

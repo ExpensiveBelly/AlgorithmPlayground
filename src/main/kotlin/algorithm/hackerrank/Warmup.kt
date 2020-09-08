@@ -85,3 +85,19 @@ fun staircase(n: Int) {
         println()
     }
 }
+
+/**
+ * https://www.hackerrank.com/challenges/mini-max-sum/
+ */
+fun miniMaxSum(arr: Array<Int>): Unit {
+    val (min, max) = arr.foldIndexed(Pair(arr[0].toLong(), arr[0].toLong()),
+        { index: Int, (min, max): Pair<Long, Long>, _: Int ->
+            when {
+                arr[index] < min -> Pair(arr[index].toLong(), max)
+                arr[index] > max -> Pair(min, arr[index].toLong())
+                else -> Pair(min, max)
+            }
+        })
+    val sum = arr.map { it.toLong() }.sum()
+    println("${sum - max} ${sum - min}")
+}
