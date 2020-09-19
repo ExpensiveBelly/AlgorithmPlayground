@@ -37,4 +37,10 @@ class WarmupKtTest {
         miniMaxSum(arrayOf(1, 3, 5, 7, 9))
         miniMaxSum(arrayOf(1, 2, 3, 4, 5))
     }
+
+    @Test
+    fun timeConversion() {
+        assertEquals("12:01:00", timeConversion("12:01:00PM"))
+        assertEquals("00:01:00", timeConversion("12:01:00AM"))
+    }
 }

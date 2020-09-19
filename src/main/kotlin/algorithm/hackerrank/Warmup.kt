@@ -101,3 +101,20 @@ fun miniMaxSum(arr: Array<Int>): Unit {
     val sum = arr.map { it.toLong() }.sum()
     println("${sum - max} ${sum - min}")
 }
+
+/**
+ * https://www.hackerrank.com/challenges/time-conversion/problem
+ */
+
+fun timeConversion(s: String): String {
+    val amOrPm = s.takeLast(2)
+    val hour = s.take(2).toInt()
+    val stringFromHour: (Int) -> String = { it.toString().padStart(2, '0') + s.substring(2, s.length - 2) }
+    return when {
+        amOrPm.equals("am", ignoreCase = true) -> when {
+            hour < 12 -> s.take(8)
+            else -> stringFromHour(hour - 12)
+        }
+        else -> stringFromHour(if (hour < 12) (hour + 12) else hour)
+    }
+}
