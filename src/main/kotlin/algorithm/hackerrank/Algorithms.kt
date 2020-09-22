@@ -184,3 +184,16 @@ https://www.hackerrank.com/challenges/birthday-cake-candles/problem?utm_campaign
 fun birthdayCakeCandles(ar: Array<Int>): Int {
     return ar.groupingBy { it }.eachCount().maxBy { it.value }?.value ?: 0
 }
+
+/*
+https://www.hackerrank.com/challenges/utopian-tree/problem
+
+Solution extracted from: https://www.youtube.com/watch?v=C0YaIr8_mQU&t=632s
+ */
+
+fun utopianTreeYouTube(n: Int): Int = (1.shl((n shr 1) + 1) - 1).shl(n % 2)
+
+fun utopianTree(n: Int): Int =
+    generateSequence(1, { if (it % 2 == 0) it.inc() else it * 2 })
+        .take(n + 1)
+        .lastOrNull() ?: 1

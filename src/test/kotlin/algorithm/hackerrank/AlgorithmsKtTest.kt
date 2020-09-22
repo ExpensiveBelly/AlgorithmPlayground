@@ -95,5 +95,13 @@ class AlgorithmsKtTest {
     fun birthdayCakeCandles() {
         assertEquals(2, birthdayCakeCandles(arrayOf(3, 2, 1, 3)))
     }
+
+    @Test
+    fun utopianTree() {
+        assertEquals(1, utopianTree(0))
+        assertEquals(15, utopianTree(6))
+        assertEquals(30, utopianTree(7))
+        assertEquals(31, utopianTree(8))
+    }
 }
 
