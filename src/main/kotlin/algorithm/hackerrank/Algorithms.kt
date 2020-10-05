@@ -197,3 +197,9 @@ fun utopianTree(n: Int): Int =
     generateSequence(1, { if (it % 2 == 0) it.inc() else it * 2 })
         .take(n + 1)
         .lastOrNull() ?: 1
+
+/*
+https://www.hackerrank.com/challenges/angry-professor/problem?h_r=next-challenge&h_v=zen
+ */
+
+fun angryProfessor(k: Int, a: Array<Int>): String = if (a.count { it <= 0 } >= k) "NO" else "YES"
