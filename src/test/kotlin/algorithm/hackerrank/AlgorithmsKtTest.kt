@@ -103,5 +103,10 @@ class AlgorithmsKtTest {
         assertEquals(30, utopianTree(7))
         assertEquals(31, utopianTree(8))
     }
+
+    @Test
+    fun beautifulDays() {
+        assertEquals(2, beautifulDays(20, 23, 6))
+    }
 }
 

@@ -203,3 +203,9 @@ https://www.hackerrank.com/challenges/angry-professor/problem?h_r=next-challenge
  */
 
 fun angryProfessor(k: Int, a: Array<Int>): String = if (a.count { it <= 0 } >= k) "NO" else "YES"
+
+/**
+ * https://www.hackerrank.com/challenges/beautiful-days-at-the-movies/problem?h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+ */
+fun beautifulDays(i: Int, j: Int, k: Int): Int =
+    (i..j).sumBy { if ((it.toLong() - it.toString().reversed().toLong()) % k == 0L) 1 else 0 }
