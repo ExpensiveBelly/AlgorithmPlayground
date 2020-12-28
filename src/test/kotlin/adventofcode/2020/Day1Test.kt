@@ -9,7 +9,7 @@ class Day1Test {
 
     @Test
     fun `Part 1 - find pair that sums 2020`() {
-        val input = Resources.resourceAsList("adventofcode/Day1.txt")
+        val input = Resources.resourceAsList("adventofcode/2020/Day1.txt")
 
         val (first, second) = input.map { it.toInt() }.pair2020()
 
@@ -18,7 +18,7 @@ class Day1Test {
 
     @Test
     fun `Part 2 - find triple that sums 2020`() {
-        val input = Resources.resourceAsList("adventofcode/Day1.txt")
+        val input = Resources.resourceAsList("adventofcode/2020/Day1.txt")
 
         val (first, second, third) = input.map { it.toInt() }.triple2020()
 
