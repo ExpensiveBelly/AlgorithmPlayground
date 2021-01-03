@@ -17,6 +17,10 @@ private const val EyeColor = "ecl"
 private const val PassportID = "pid"
 private const val CountryID = "cid"
 
+/**
+https://adventofcode.com/2020/day/4
+ */
+
 class Day4Test {
 
     private val input by lazy {

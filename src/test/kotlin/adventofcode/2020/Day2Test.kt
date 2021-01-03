@@ -4,6 +4,10 @@ import Resources
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+/**
+https://adventofcode.com/2020/day/2
+ */
+
 class Day2Test {
 
     private val input = Resources.resourceAsList("adventofcode/2020/Day2.txt").map {

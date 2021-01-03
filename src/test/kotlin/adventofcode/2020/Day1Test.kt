@@ -4,6 +4,9 @@ import Resources
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
+/**
+https://adventofcode.com/2020/day/1
+ */
 
 class Day1Test {
 

@@ -7,6 +7,10 @@ import kotlin.math.absoluteValue
 import kotlin.math.min
 import kotlin.math.pow
 
+/**
+https://adventofcode.com/2020/day/5
+ */
+
 class Day5Test {
 
     private val input by lazy {
