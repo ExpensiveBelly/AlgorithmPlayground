@@ -3,10 +3,8 @@ package adventofcode.`2020`
 import Resources
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.sequences.Sequence
 import kotlin.sequences.count
 import kotlin.sequences.map
-import kotlin.sequences.sequence
 
 private const val BirthYear = "byr"
 private const val IssueYear = "iyr"
@@ -76,27 +74,3 @@ private fun List<String>.toListOfPairs() =
             .map { it.first() to it.last() }
             .filter { it.first.trim().isNotEmpty() }
     }.flatten()
-
-/*
-https://discuss.kotlinlang.org/t/splitting-sequence-in-chunks-based-on-predicate/19005/5
- */
-
-private fun <T> Sequence<T>.chunked(predicate: (T, T) -> Boolean): Sequence<List<T>> {
-    val underlyingSequence = this
-    return sequence {
-        val buffer = mutableListOf<T>()
-        var last: T? = null
-        for (current in underlyingSequence) {
-            val shouldSplit = last?.let { predicate(it, current) } ?: false
-            if (shouldSplit) {
-                yield(buffer.toList())
-                buffer.clear()
-            }
-            buffer.add(current)
-            last = current
-        }
-        if (buffer.isNotEmpty()) {
-            yield(buffer)
-        }
-    }
-}
