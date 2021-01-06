@@ -18,10 +18,14 @@ class Day7Test {
                         it.replace("bags", "")
                             .replace("bag", "")
                             .replace(".", "")
+                            .replace("no", "0")
                             .trim()
                     }
             }.map { it.first() to it.drop(1) }.toMap()
-            .mapValues { entry -> entry.value.flatMap { it.split(",") }.map { it.trim() } }
+            .mapValues { entry ->
+                entry.value.flatMap { it.split(",") }.map { it.trim() }
+                    .map { Character.getNumericValue(it.first()) to it.drop(1).trim() }
+            }.filterNot { entry -> entry.value.all { it.first == 0 } }
     }
 
     @Test
@@ -32,11 +36,22 @@ class Day7Test {
         ) // -1 because we don't want to include "shiny gold" in the set
     }
 
+    @Test
+    fun `part 2`() {
+        assertEquals(2431, childrenOf(input["shiny gold"] ?: emptyList()) - 1)
+    }
+
+    private fun childrenOf(list: List<Pair<Int, String>>): Int =
+        if (list.isEmpty()) 1
+        else 1 + list.sumBy { (cost, child) ->
+            cost * childrenOf(input[child] ?: emptyList())
+        }
+
     private tailrec fun parentsOf(direct: Set<String>, acc: Set<String> = emptySet()): Set<String> =
         if (direct.isEmpty()) acc
         else parentsOf(input.filterValues { list ->
             list.any { s ->
-                direct.any { it in s }
+                direct.any { it in s.second }
             }
         }.keys, acc + direct)
 }
