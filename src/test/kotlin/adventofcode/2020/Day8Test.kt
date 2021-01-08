@@ -27,20 +27,11 @@ class Day8Test {
         acc: Int = 0
     ): Int =
         if (instruction.index in visited) acc
-        else when (instruction.operation) {
-            "nop" -> accumulateUntilLoop(input[instruction.index + 1], visited + instruction.index, acc)
-            "acc" -> accumulateUntilLoop(
-                input[instruction.index + 1],
-                visited + instruction.index,
-                acc + instruction.argument
-            )
-            "jmp" -> accumulateUntilLoop(
-                input[instruction.index + instruction.argument],
-                visited + instruction.index,
-                acc
-            )
-            else -> throw IllegalStateException()
-        }
+        else accumulateUntilLoop(
+            instruction = if (instruction.operation == "jmp") input[instruction.index + instruction.argument] else input[instruction.index + 1],
+            visited = visited + instruction.index,
+            acc = if (instruction.operation == "acc") acc + instruction.argument else acc
+        )
 }
 
 private data class Instruction(val index: Int, val operation: String, val argument: Int)
