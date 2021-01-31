@@ -15,7 +15,7 @@ class Day12Test {
     @ExperimentalStdlibApi
     @Test
     fun `part 1`() {
-        val (shipDirection, _) = input.scan(
+        val (shipDirection, _) = input.fold(
             ShipDirection(
                 north = 0,
                 east = 0,
@@ -38,7 +38,7 @@ class Day12Test {
                 'R' -> shipDirection to (currentDirection + (shipInstruction.units / 90))
                 else -> throw IllegalStateException()
             }
-        }.last()
+        }
         val manhattan = shipDirection.let {
             (it.east - it.west).absoluteValue + (it.north - it.south).absoluteValue
         }
