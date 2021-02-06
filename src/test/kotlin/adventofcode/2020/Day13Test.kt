@@ -27,4 +27,37 @@ class Day13Test {
         val entry = busTimes.minBy { it.value }!!
         assertEquals(102, entry.key * entry.value.minus(timestamp))
     }
+
+    @Test
+    fun `part 2`() {
+        val busesWithOffsets =
+            input.last().split(",").withIndex().filter { it.value != "x" }
+                .map { it.value.toLong() to it.index.toLong() }
+//        val debug = true
+//        var multiple = 1L
+//        var result = 0L
+//        if (debug) println(busesWithOffsets)
+//        busesWithOffsets.forEach { (bus, offset) ->
+//            while (((result + offset) % bus != 0L).also { if (debug) println("($result + $offset) % $bus") }) {
+//                if (debug) println("result = $result + $multiple")
+//                result += multiple
+//            }
+//            if (debug) println("multiple = $multiple * $bus")
+//            multiple *= bus
+//        }
+//        println(result.toString())
+
+        assertEquals(327300950120029, findTimeStamp(busesWithOffsets))
+    }
+
+    private tailrec fun findTimeStamp(buses: List<Pair<Long, Long>>, multiple: Long = 1, result: Long = 0): Long =
+        if (buses.isEmpty()) result
+        else {
+            val (bus, offset) = buses.first()
+            findTimeStamp(buses.drop(1), multiple * bus, calculateResult(result, multiple, bus, offset))
+        }
+
+    private tailrec fun calculateResult(result: Long, multiple: Long, bus: Long, offset: Long): Long =
+        if ((result + offset) % bus != 0L) calculateResult(result + multiple, multiple, bus, offset)
+        else result
 }
