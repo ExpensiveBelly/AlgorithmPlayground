@@ -3,7 +3,18 @@ package adventofcode.`2020`
 import Resources
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import kotlin.Double
+import kotlin.IllegalStateException
+import kotlin.Int
+import kotlin.Long
+import kotlin.String
+import kotlin.also
+import kotlin.collections.associate
+import kotlin.collections.plus
+import kotlin.getValue
+import kotlin.lazy
 import kotlin.math.pow
+import kotlin.to
 
 
 class Day14Test {
@@ -26,7 +37,40 @@ class Day14Test {
 
         assertEquals(13556564111697, map.values.sum())
     }
+
+    @Test
+    fun `part 2`() {
+        val map = input.fold(emptyMap(), { acc: Map<Long, Long>, memoryValue: MemoryValue ->
+            val binaryAddressPadded =
+                memoryValue.address.toBinaryString().padStart(memoryValue.bitmask.value.length, '0')
+                    .applyV2(memoryValue.bitmask)
+            acc + binaryAddressPadded.toListOfAddresses().associate { it.toDecimalNumber() to memoryValue.value }
+        })
+        assertEquals(4173715962894, map.values.sum())
+    }
 }
+
+private fun String.toListOfAddresses(): List<String> {
+    val count = count { it == 'X' }
+    val number = (0L until 2.0.pow(count).toLong()).map { it.toBinaryString().padStart(count, '0') }
+    return number.map { binaryNumber ->
+        var positionToReplace = 0
+        toCharArray().map { digit ->
+            if (digit == 'X') {
+                binaryNumber[positionToReplace].also { positionToReplace += 1 }
+            } else digit
+        }.joinToString("")
+    }
+}
+
+private fun String.applyV2(bitmask: Bitmask) = bitmask.value.zip(this).map { (mask, value) ->
+    when (mask) {
+        'X' -> mask
+        '0' -> value
+        '1' -> '1'
+        else -> throw IllegalStateException()
+    }
+}.joinToString("")
 
 private fun String.toDecimalNumber() = binaryToDecimalRecursive(this) // toLong(radix = 2)
 
@@ -48,8 +92,9 @@ private fun String.apply(bitmask: Bitmask) = bitmask.value.zip(this).map { (mask
 private fun Long.toBinaryString() = decimalToBinaryRecursive(this)
 
 private tailrec fun decimalToBinaryRecursive(long: Long, result: String = ""): String =
-    if (long == 0L) result.reversed()
-    else decimalToBinaryRecursive(long.div(2), result + long.rem(2).toString())
+    if (long == 0L) {
+        if (result.isEmpty()) "0" else result.reversed()
+    } else decimalToBinaryRecursive(long.div(2), result + long.rem(2).toString())
 
 private fun String.toMemoryValue(mask: String): MemoryValue {
     val split = split("=", limit = 2)
