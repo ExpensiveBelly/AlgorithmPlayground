@@ -6,6 +6,7 @@ import java.net.URI
 object Resources {
 
     fun fromJsonFile(fileName: String): Triple<List<Int>, List<Int>, List<Int>> {
+        @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         val readText = File(Resources.javaClass.classLoader.getResource(fileName).toURI()).readText()
         val fromJson = Gson().fromJson<LinkedListInput>(readText, LinkedListInput::class.java)
 
@@ -21,5 +22,4 @@ object Resources {
     private fun String.toURI(): URI =
         Resources.javaClass.classLoader.getResource(this)?.toURI()
             ?: throw IllegalArgumentException("Cannot find Resource: $this")
-
 }

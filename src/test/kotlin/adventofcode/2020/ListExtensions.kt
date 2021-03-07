@@ -1,11 +1,19 @@
 package adventofcode.`2020`
 
 
+inline class Filename(val value: String)
+
+fun Filename.readChunkedLines(): List<List<String>> = Resources.resourceAsList(value)
+    .asSequence()
+    .chunked { last, _ -> last.isEmpty() }
+    .map { it.filterNot { it.isEmpty() } }
+    .toList()
+
 /*
 https://discuss.kotlinlang.org/t/splitting-sequence-in-chunks-based-on-predicate/19005/5
  */
 
-internal fun <T> Sequence<T>.chunked(predicate: (T, T) -> Boolean): Sequence<List<T>> {
+fun <T> Sequence<T>.chunked(predicate: (T, T) -> Boolean): Sequence<List<T>> {
     val underlyingSequence = this
     return sequence {
         val buffer = mutableListOf<T>()
