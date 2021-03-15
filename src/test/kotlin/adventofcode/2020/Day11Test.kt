@@ -53,7 +53,7 @@ private fun List<List<Char>>.adjacents(i: Int, j: Int) =
     neighborCoordinatesOf(i, j).filter { it.isInBounds(size, this[0].size) }
         .map { (x, y) -> this[x][y] }
 
-private fun Pair<Int, Int>.isInBounds(rowSize: Int, columnSize: Int) =
+fun Pair<Int, Int>.isInBounds(rowSize: Int, columnSize: Int) =
     !(first < 0).or(first >= rowSize).or(second < 0).or(second >= columnSize)
 
 private fun neighborCoordinatesOf(x: Int, y: Int) = arrayOf(

@@ -10,6 +10,7 @@ import kotlin.sequences.first
 import kotlin.sequences.flatten
 import kotlin.sequences.last
 import kotlin.sequences.map
+import kotlin.sequences.plus
 import kotlin.sequences.sequenceOf
 import kotlin.sequences.sum
 import kotlin.sequences.take
@@ -131,7 +132,7 @@ class Day16Test {
         if (lists.any { it.isEmpty() }) result
         else aggregatePositions(lists.map { it.drop(1) }, result + listOf(lists.flatMap { it.take(1) }))
 
-    private data class Restriction(val name: String, val first: IntRange, val second: IntRange)
+    private data class Restriction(val name: String, val low: IntRange, val high: IntRange)
 
     private data class InputData(
         val restrictions: List<Restriction>,
@@ -144,11 +145,11 @@ class Day16Test {
 
         val restrictions = data[0].map { line ->
             val (name, rest) = line.split(": ")
-            val restrList = rest.split(" or ").map {
+            val (low, high) = rest.split(" or ").map {
                 val (lower, upper) = it.split("-")
                 IntRange(lower.toInt(), upper.toInt())
             }
-            Restriction(name, restrList[0], restrList[1])
+            Restriction(name, low, high)
         }
 
         val myTicket = data[1][1].split(",").map { it.toInt() }
@@ -162,7 +163,7 @@ class Day16Test {
     fun `part 1 Nir solution`() {
         val inputData = getInput()
         assertEquals(22977, inputData.nearbyTickets.asSequence().flatten().filter { ticketValue ->
-            !inputData.restrictions.any { ticketValue in it.first || ticketValue in it.second }
+            inputData.restrictions.none { (_, low, high) -> ticketValue in low || ticketValue in high }
         }.sum())
     }
 
@@ -171,9 +172,11 @@ class Day16Test {
         val inputData = getInput()
         val validTickets = (inputData.nearbyTickets.asSequence().filter { ticket ->
             ticket.all { ticketValue ->
-                inputData.restrictions.any { ticketValue in it.first || ticketValue in it.second }
+                inputData.restrictions.any { (_, low, high) ->
+                    ticketValue in low || ticketValue in high
+                }
             }
-        }.toList() + sequenceOf(inputData.myTicket)).toList()
+        } + sequenceOf(inputData.myTicket)).toList()
 
         val numFields = inputData.myTicket.size
         val possibilities = (1..numFields).map { (0 until numFields).toMutableSet() }
@@ -182,7 +185,7 @@ class Day16Test {
             for ((ticketIndex, ticketValue) in ticket.withIndex()) {
                 for (restrictionIndex in possibilities[ticketIndex].toList()) {
                     val restriction = inputData.restrictions[restrictionIndex]
-                    if (ticketValue !in restriction.first && ticketValue !in restriction.second) {
+                    if (ticketValue !in restriction.low && ticketValue !in restriction.high) {
                         possibilities[ticketIndex].remove(restrictionIndex)
                     }
                 }
