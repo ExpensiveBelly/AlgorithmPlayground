@@ -1,5 +1,6 @@
 package variance
 
+
 /**
  * https://stackoverflow.com/questions/2662369/covariance-and-contravariance-real-world-example/35897887#35897887
  */
@@ -33,5 +34,9 @@ class FruitVariance {
 
         fun covariant(fruit: ICovariant<Fruit>) {}
         fun contravariant(apple: IContravariant<Apple>) {}
+
+        var apple: ICovariant<Fruit> = Covariant<Apple>() //because it's covariant
+        var fruit: IContravariant<Apple> = Contravariant<Fruit>() //because it's contravariant
+
     }
 }
