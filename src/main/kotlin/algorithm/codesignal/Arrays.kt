@@ -18,11 +18,11 @@ package algorithm.codesignal
 
 private fun firstDuplicateInefficient(a: MutableList<Int>): Int {
     return a.asSequence()
-            .mapIndexed { index, number -> index to number }
-            .groupBy { it.second }.also { println("1 $it") }
-            .filter { it.value.size > 1 }.also { println("2 $it") }
-            .mapValues { it.value.drop(1) }
-            .minBy { it.value.first().first }.also { println("3 $it") }
+        .mapIndexed { index, number -> index to number }
+        .groupBy { it.second }.also { println("1 $it") }
+        .filter { it.value.size > 1 }.also { println("2 $it") }
+        .mapValues { it.value.drop(1) }
+        .minByOrNull { it.value.first().first }.also { println("3 $it") }
             ?.toPair()?.second?.first()?.second ?: -1
 }
 

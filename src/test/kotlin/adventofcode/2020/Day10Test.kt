@@ -19,7 +19,7 @@ class Day10Test {
 
     @Test
     fun `part 2 copied`() {
-        val adapters: List<Int> = input.plus(0).plus(input.max()!! + 3).sorted()
+        val adapters: List<Int> = input.plus(0).plus(input.maxOrNull()!! + 3).sorted()
         val pathsByAdapter: MutableMap<Int, Long> = mutableMapOf(0 to 1L)
         adapters.drop(1).forEach { adapter ->
             pathsByAdapter[adapter] = (1..3).map { lookBack ->
@@ -67,7 +67,7 @@ class Day10Test {
     ): Differences =
         if (input.isEmpty()) acc
         else {
-            val newJolt = input.filter { it in (currentJolt..currentJolt + 3) }.min()!!
+            val newJolt = input.filter { it in (currentJolt..currentJolt + 3) }.minOrNull()!!
             accumulateDifferences(
                 input.toMutableList().apply { remove(newJolt) },
                 newJolt,

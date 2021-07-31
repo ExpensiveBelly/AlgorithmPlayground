@@ -84,7 +84,7 @@ class KotlinCollectionsSolutions {
 
     fun `filter a list to another list with items that start with o`() = items.filter { it.startsWith('o') }
 
-    fun `finding shortest string a list`() = items.minBy { it.length }
+    fun `finding shortest string a list`() = items.minByOrNull { it.length }
 
 
     fun `iterate an array, map the values, calculate the average`(): Double =
@@ -92,10 +92,10 @@ class KotlinCollectionsSolutions {
             arrayOf(1, 2, 3).map { 2 * it + 1 }.average()
 
     fun `lazily iterate a list of strings, map the values, convert to Int, find max`(): Int? =
-            sequenceOf("a1", "a2", "a3")
-                    .map { it.substring(1) }
-                    .map(String::toInt)
-                    .max()
+        sequenceOf("a1", "a2", "a3")
+            .map { it.substring(1) }
+            .map(String::toInt)
+            .maxOrNull()
 
     fun `lazily iterate a stream of Ints, map the values, print results`() {
         (1..3).map { "a$it" }.forEach(::println)

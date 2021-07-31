@@ -24,7 +24,7 @@ class Day13Test {
             bus to generateSequence(bus) { it + bus }.takeWhile { it < timestamp + bus }.last()
         }.toMap()
 
-        val entry = busTimes.minBy { it.value }!!
+        val entry = busTimes.minByOrNull { it.value }!!
         assertEquals(102, entry.key * entry.value.minus(timestamp))
     }
 

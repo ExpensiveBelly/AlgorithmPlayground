@@ -70,13 +70,13 @@ fun pickingNumbers(a: Array<Int>): Int {
         .map { number ->
             number to (a.filterNot { abs(it - number) > 1 }).groupingBy { it }.eachCount()
         }
-        .maxBy { (first, second) ->
+        .maxByOrNull { (first, second) ->
             sum(first, second)
         }?.let { (number, map) -> sum(number, map) } ?: 0
 }
 
 private fun sum(number: Int, map: Map<Int, Int>) =
-    map.getValue(number) + (map.filterKeys { it != number }.maxBy { it.value }?.value ?: 0)
+    map.getValue(number) + (map.filterKeys { it != number }.maxByOrNull { it.value }?.value ?: 0)
 
 /*
 https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
@@ -182,7 +182,7 @@ https://www.hackerrank.com/challenges/birthday-cake-candles/problem?utm_campaign
  */
 
 fun birthdayCakeCandles(ar: Array<Int>): Int {
-    return ar.groupingBy { it }.eachCount().maxBy { it.value }?.value ?: 0
+    return ar.groupingBy { it }.eachCount().maxByOrNull { it.value }?.value ?: 0
 }
 
 /*

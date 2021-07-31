@@ -139,7 +139,7 @@ https://www.hackerrank.com/challenges/gem-stones/problem?h_r=next-challenge&h_v=
 fun gemstones(arr: Array<String>) = arr.toList().zipWithNext()
     .map {
         it.first.toCharArray().intersect(it.second.toCharArray().toList()).size
-    }.min()
+    }.minOrNull()
 
 
 /*

@@ -37,9 +37,15 @@ fun hourglassSum(arr: Array<Array<Int>>): Int {
         .mapIndexed { index, list ->
             println("index: $index list: ${list.size} $list")
             list.first().sum()
-                .also { print("first: ${list.first().sum()} ") } + list[1][1].also { print("mid: $it") } + list.last()
+                .also {
+                    print(
+                        "first: ${
+                            list.first().sum()
+                        } "
+                    )
+                } + list[1][1].also { print("mid: $it") } + list.last()
                 .sum().also { println(" last: $it") }
-        }.also { println(it) }.max()!!
+        }.also { println(it) }.maxOrNull()!!
 }
 
 fun <T : Any> tryOrNull(body: () -> T?): T? = try {

@@ -35,8 +35,8 @@ class Day9Test {
             sum <= element
         }
         return if (list.sum() == element) {
-            list.max()?.let { max ->
-                list.min()?.let { min ->
+            list.maxOrNull()?.let { max ->
+                list.minOrNull()?.let { min ->
                     min + max
                 }
             } ?: INVALID_INDEX
