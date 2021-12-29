@@ -1,4 +1,4 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals
@@ -24,7 +24,9 @@ class Day8Test {
         assertEquals(1137, accumulateTillLoop())
     }
 
-    private fun accumulateTillLoop() = execute(input).takeIf { it.type == ResultType.LOOP }?.let { it.accumulator } ?: 0
+    private fun accumulateTillLoop() =
+        execute(input).takeIf { it.type == ResultType.LOOP }?.accumulator
+            ?: 0
 
     @Test
     fun `part 2`() {

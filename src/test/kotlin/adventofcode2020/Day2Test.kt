@@ -1,4 +1,4 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals
@@ -18,7 +18,7 @@ class Day2Test {
 
     @Test
     fun `part 1`() {
-        val result = input.sumBy { data ->
+        val result = input.sumOf { data ->
             val amountOfLetters = data.password.filter { it == data.letter }.length
             (amountOfLetters in (data.min..data.max)).toInt()
         }
@@ -28,7 +28,7 @@ class Day2Test {
 
     @Test
     fun `part 2`() {
-        val result = input.sumBy { data ->
+        val result = input.sumOf { data ->
             (listOfNotNull(
                 data.password.getOrNull(data.min.toOneIndex()),
                 data.password.getOrNull(data.max.toOneIndex())

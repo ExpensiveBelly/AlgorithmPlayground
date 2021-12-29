@@ -1,4 +1,4 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals
@@ -22,7 +22,7 @@ class Day11Test {
             b = nextRound(a)
         }
 //        println(a.map { it.joinToString(" ") + '\n' })
-        assertEquals(2238, a.sumBy { row -> row.count { it.isOccupied() } })
+        assertEquals(2238, a.sumOf { row -> row.count { it.isOccupied() } })
     }
 
     @Test
@@ -35,7 +35,7 @@ class Day11Test {
             b = nextRoundPart2(a)
         }
 
-        assertEquals(2013, a.sumBy { row -> row.count { it.isOccupied() } })
+        assertEquals(2013, a.sumOf { row -> row.count { it.isOccupied() } })
     }
 
     @Test

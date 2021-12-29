@@ -1,4 +1,4 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals

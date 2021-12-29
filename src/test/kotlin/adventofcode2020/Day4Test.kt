@@ -1,10 +1,8 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.sequences.count
-import kotlin.sequences.map
 
 private const val BirthYear = "byr"
 private const val IssueYear = "iyr"

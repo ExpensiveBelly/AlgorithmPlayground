@@ -1,20 +1,9 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.Double
-import kotlin.IllegalStateException
-import kotlin.Int
-import kotlin.Long
-import kotlin.String
-import kotlin.also
-import kotlin.collections.associate
-import kotlin.collections.plus
-import kotlin.getValue
-import kotlin.lazy
 import kotlin.math.pow
-import kotlin.to
 
 
 class Day14Test {

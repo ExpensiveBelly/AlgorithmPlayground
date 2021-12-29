@@ -1,20 +1,9 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 import Resources
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
-import kotlin.sequences.drop
-import kotlin.sequences.filter
-import kotlin.sequences.first
-import kotlin.sequences.flatten
-import kotlin.sequences.last
-import kotlin.sequences.map
-import kotlin.sequences.plus
-import kotlin.sequences.sequenceOf
-import kotlin.sequences.sum
-import kotlin.sequences.take
-import kotlin.sequences.toList
 
 
 private data class Ranges(val name: String, val low: Range, val high: Range)

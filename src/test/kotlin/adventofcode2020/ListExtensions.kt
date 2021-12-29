@@ -1,7 +1,8 @@
-package adventofcode.`2020`
+package adventofcode2020
 
 
-inline class Filename(val value: String)
+@JvmInline
+value class Filename(val value: String)
 
 fun Filename.readChunkedLines(): List<List<String>> = Resources.resourceAsList(value)
     .asSequence()
