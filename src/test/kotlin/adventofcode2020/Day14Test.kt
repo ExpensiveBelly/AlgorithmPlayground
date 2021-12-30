@@ -61,7 +61,7 @@ private fun String.applyV2(bitmask: Bitmask) = bitmask.value.zip(this).map { (ma
     }
 }.joinToString("")
 
-private fun String.toDecimalNumber() = binaryToDecimalRecursive(this) // toLong(radix = 2)
+fun String.toDecimalNumber() = binaryToDecimalRecursive(this) // toLong(radix = 2)
 
 private tailrec fun binaryToDecimalRecursive(input: String, index: Int = 0, result: Double = 0.0): Long =
     if (input.isEmpty()) result.toLong()
@@ -93,4 +93,6 @@ private fun String.toMemoryValue(mask: String): MemoryValue {
 }
 
 data class MemoryValue(val value: Long, val address: Long, val bitmask: Bitmask)
-inline class Bitmask(val value: String)
+
+@JvmInline
+value class Bitmask(val value: String)
