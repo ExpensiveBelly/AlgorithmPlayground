@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.22'
 }
 
 group 'expensive.belly'
@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.22"
     implementation 'com.google.code.gson:gson:2.8.8'
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
-    implementation "io.reactivex.rxjava3:rxjava:3.1.1"
+    implementation "io.reactivex.rxjava3:rxjava:3.1.5"
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
 
     testImplementation 'junit:junit:4.13'
@@ -23,8 +23,8 @@ dependencies {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 }
