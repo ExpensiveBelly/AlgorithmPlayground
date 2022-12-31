@@ -33,3 +33,12 @@ fun <T> Sequence<T>.chunked(predicate: (T, T) -> Boolean): Sequence<List<T>> {
         }
     }
 }
+
+/**
+ * https://kotlinlang.slack.com/archives/C87V9MQFK/p1672321818262339?thread_ts=1672317042.937679&cid=C87V9MQFK
+ */
+
+inline fun <T> Iterable<T>.splitOnce(predicate: (T) -> Boolean): Pair<List<T>, List<T>> {
+    val iterator = iterator()
+    return Iterable { iterator }.takeWhile { !predicate(it) } to Iterable { iterator }.toList()
+}
