@@ -10,7 +10,7 @@ private const val EMPTY = 'L'
 class Day11Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day11.txt").map { it.toList() }
+        Resources.resourceAsList("adventofcode2020/Day11.txt").map { it.toList() }
     }
 
     @Test
@@ -40,7 +40,7 @@ class Day11Test {
 
     @Test
     fun `first seats for the example`() {
-        val example = Resources.resourceAsList("adventofcode/2020/Day11Example.txt").map { it.toList() }
+        val example = Resources.resourceAsList("adventofcode2020/Day11Example.txt").map { it.toList() }
 
         assertEquals(8, example.firstSeats(i = 4, j = 3).count { it.isOccupied() })
     }
