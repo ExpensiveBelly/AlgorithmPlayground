@@ -11,7 +11,7 @@ https://adventofcode.com/2020/day/6
 class Day6Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day6.txt")
+        Resources.resourceAsList("adventofcode2020/Day6.txt")
             .asSequence()
             .chunked { last, _ -> last.isEmpty() }
             .map { list -> list.filter { it.isNotEmpty() } }

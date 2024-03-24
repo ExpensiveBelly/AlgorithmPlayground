@@ -11,7 +11,7 @@ import org.junit.Test
 class Day7Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day7.txt")
+        Resources.resourceAsList("adventofcode2020/Day7.txt")
             .map { s ->
                 s.split("contain")
                     .map {

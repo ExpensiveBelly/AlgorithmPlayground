@@ -14,7 +14,7 @@ https://adventofcode.com/2020/day/5
 class Day5Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day5.txt")
+        Resources.resourceAsList("adventofcode2020/Day5.txt")
     }
 
     @Test

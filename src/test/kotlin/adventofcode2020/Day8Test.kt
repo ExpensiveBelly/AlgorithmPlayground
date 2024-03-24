@@ -11,7 +11,7 @@ private const val NOP_OPERATION = "nop"
 class Day8Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day8.txt")
+        Resources.resourceAsList("adventofcode2020/Day8.txt")
             .asSequence()
             .map { it.split(" ", limit = 2) }
             .withIndex()

@@ -8,7 +8,7 @@ import org.junit.Test
 class Day13Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day13.txt")
+        Resources.resourceAsList("adventofcode2020/Day13.txt")
     }
 
     @Test

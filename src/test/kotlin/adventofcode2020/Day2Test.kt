@@ -10,7 +10,7 @@ https://adventofcode.com/2020/day/2
 
 class Day2Test {
 
-    private val input = Resources.resourceAsList("adventofcode/2020/Day2.txt").map {
+    private val input = Resources.resourceAsList("adventofcode2020/Day2.txt").map {
         val (a, b, c) = it.split(" ", limit = 3)
         val (min, max) = a.split("-", limit = 2)
         Data(min.toInt(), max.toInt(), b.toCharArray().first(), c)

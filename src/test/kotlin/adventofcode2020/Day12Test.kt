@@ -8,7 +8,7 @@ import kotlin.math.absoluteValue
 class Day12Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day12.txt").map { ShipInstruction(it[0], it.drop(1).toInt()) }
+        Resources.resourceAsList("adventofcode2020/Day12.txt").map { ShipInstruction(it[0], it.drop(1).toInt()) }
     }
 
     @Test

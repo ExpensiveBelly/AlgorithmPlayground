@@ -8,7 +8,7 @@ import org.junit.Test
 class Day10Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day10.txt").map { it.toInt() }
+        Resources.resourceAsList("adventofcode2020/Day10.txt").map { it.toInt() }
     }
 
     @Test

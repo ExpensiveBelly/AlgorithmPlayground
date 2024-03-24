@@ -10,7 +10,7 @@ private const val INVALID_INDEX = -1L
 class Day9Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day9.txt").map { it.toLong() }
+        Resources.resourceAsList("adventofcode2020/Day9.txt").map { it.toLong() }
     }
 
     @Test

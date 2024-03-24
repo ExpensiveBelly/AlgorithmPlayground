@@ -9,7 +9,7 @@ import kotlin.math.pow
 class Day14Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day14.txt")
+        Resources.resourceAsList("adventofcode2020/Day14.txt")
             .fold("" to emptyList<MemoryValue>(), { (currentMask, list), s: String ->
                 if (s.startsWith("mask")) s.drop(7) to list
                 else currentMask to list + listOf(s.toMemoryValue(currentMask))

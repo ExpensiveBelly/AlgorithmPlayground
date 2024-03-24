@@ -20,7 +20,7 @@ https://adventofcode.com/2020/day/4
 class Day4Test {
 
     private val input by lazy {
-        Resources.resourceAsList("adventofcode/2020/Day4.txt")
+        Resources.resourceAsList("adventofcode2020/Day4.txt")
             .asSequence()
             .chunked { last, _ -> last.isEmpty() }
             .map { list: List<String> -> list.toListOfPairs() }

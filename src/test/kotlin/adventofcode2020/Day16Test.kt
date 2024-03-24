@@ -17,7 +17,7 @@ private data class Ticket(
 class Day16Test {
 
     private val input by lazy {
-        val nestedLists = Resources.resourceAsList("adventofcode/2020/Day16.txt")
+        val nestedLists = Resources.resourceAsList("adventofcode2020/Day16.txt")
             .asSequence()
             .chunked { last, _ -> last.isEmpty() }
             .map { it.filterNot { it.isEmpty() } }
@@ -130,7 +130,7 @@ class Day16Test {
     )
 
     private fun getInput(): InputData {
-        val data = Filename("adventofcode/2020/Day16.txt").readChunkedLines()
+        val data = Filename("adventofcode2020/Day16.txt").readChunkedLines()
 
         val restrictions = data[0].map { line ->
             val (name, rest) = line.split(": ")

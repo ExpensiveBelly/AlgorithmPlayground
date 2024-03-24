@@ -10,7 +10,7 @@ https://adventofcode.com/2020/day/3
 
 class Day3Test {
 
-    private val input by lazy { Resources.resourceAsList("adventofcode/2020/Day3.txt") }
+    private val input by lazy { Resources.resourceAsList("adventofcode2020/Day3.txt") }
 
     @Test
     fun `part 1`() {
