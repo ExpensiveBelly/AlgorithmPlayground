@@ -3,15 +3,14 @@ dist: trusty
 before_install:
   - chmod +x gradlew
 jdk:
-  - oraclejdk17
+  - oraclejdk21
+
 # whitelist
 branches:
   only:
     - master
 os:
 - linux
-cache:
-directories:
-  - $HOME/.gradle
+
 script:
   - ./gradlew check

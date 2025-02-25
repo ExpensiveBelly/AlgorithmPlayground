@@ -1,5 +1,7 @@
 package exercism.acronym
 
+import java.util.Locale
+
 object Acronym {
     fun generate(phrase: String): String {
         return phrase
@@ -9,6 +11,6 @@ object Acronym {
             .split(" ").also { println(it) }
             .mapNotNull { it.firstOrNull() }
             .joinToString(separator = "")
-            .toUpperCase()
+            .uppercase(Locale.getDefault())
     }
 }

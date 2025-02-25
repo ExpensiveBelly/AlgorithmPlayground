@@ -62,7 +62,7 @@ abstract class AbstractMatrix<out T> : Matrix<T> {
     }
 }
 
-internal open class TransposedMatrix<out T>(protected val original: Matrix<T>) : AbstractMatrix<T>() {
+open class TransposedMatrix<out T>(protected val original: Matrix<T>) : AbstractMatrix<T>() {
     override val cols: Int
         get() = original.rows
 
@@ -72,7 +72,7 @@ internal open class TransposedMatrix<out T>(protected val original: Matrix<T>) :
     override fun get(x: Int, y: Int): T = original[y, x]
 }
 
-internal class TransposedMutableMatrix<T>(original: MutableMatrix<T>) :
+class TransposedMutableMatrix<T>(original: MutableMatrix<T>) :
     TransposedMatrix<T>(original), MutableMatrix<T> {
     override fun set(x: Int, y: Int, value: T) {
         (original as MutableMatrix<T>)[y, x] = value
@@ -85,7 +85,7 @@ fun <T> Matrix<T>.asTransposed(): Matrix<T> =
 fun <T> MutableMatrix<T>.asTransposed(): MutableMatrix<T> =
     TransposedMutableMatrix(this)
 
-internal open class ListMatrix<out T>(
+open class ListMatrix<out T>(
     override val cols: Int, override val rows: Int,
     protected val list: List<T>
 ) :
@@ -93,7 +93,7 @@ internal open class ListMatrix<out T>(
     override operator fun get(x: Int, y: Int): T = list[y * cols + x]
 }
 
-internal class MutableListMatrix<T>(cols: Int, rows: Int, list: MutableList<T>) :
+class MutableListMatrix<T>(cols: Int, rows: Int, list: MutableList<T>) :
     ListMatrix<T>(cols, rows, list), MutableMatrix<T> {
     override fun set(x: Int, y: Int, value: T) {
         (list as MutableList<T>)[y * cols + x] = value
@@ -108,7 +108,7 @@ fun <T> mutableMatrixOf(cols: Int, rows: Int, vararg elements: T): MutableMatrix
     return MutableListMatrix(cols, rows, elements.toMutableList())
 }
 
-inline private fun <T> prepareListForMatrix(cols: Int, rows: Int, init: (Int, Int) -> T): ArrayList<T> {
+inline fun <T> prepareListForMatrix(cols: Int, rows: Int, init: (Int, Int) -> T): ArrayList<T> {
     val list = ArrayList<T>(cols * rows)
     for (y in 0 until rows) {
         for (x in 0 until cols) {
@@ -118,7 +118,6 @@ inline private fun <T> prepareListForMatrix(cols: Int, rows: Int, init: (Int, In
     return list
 }
 
-@Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
 inline fun <T> createMatrix(cols: Int, rows: Int, init: (Int, Int) -> T): Matrix<T> {
     return ListMatrix(
         cols,

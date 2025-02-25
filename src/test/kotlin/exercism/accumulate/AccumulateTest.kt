@@ -2,6 +2,7 @@ package exercism.accumulate
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.util.Locale
 
 class AccumulateTest {
 
@@ -23,7 +24,7 @@ class AccumulateTest {
     fun accumulateUpperCases() {
         val input = listOf("hello", "world")
         val expectedOutput = listOf("HELLO", "WORLD")
-        assertEquals(expectedOutput, Accumulate.accumulate(input, { it.toUpperCase() }))
+        assertEquals(expectedOutput, Accumulate.accumulate(input, { it.uppercase(Locale.getDefault()) }))
     }
 
     @Test

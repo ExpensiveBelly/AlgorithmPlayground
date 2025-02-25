@@ -1,5 +1,7 @@
 package kotlincollections
 
+import java.util.Locale
+
 private const val PASS_THRESHOLD = 5
 
 class KotlinCollectionsSolutions {
@@ -69,9 +71,9 @@ class KotlinCollectionsSolutions {
 
     data class Employee(val salary: Int, val department: String)
 
-    fun `compute sum of salaries of employee`() = employees.sumBy { it.salary }
+    fun `compute sum of salaries of employee`() = employees.sumOf { it.salary }
 
-    fun `compute sum of salaries by department`() = employees.groupBy { it.department }.mapValues { it.value.sumBy { it.salary } }
+    fun `compute sum of salaries by department`() = employees.groupBy { it.department }.mapValues { it.value.sumOf { it.salary } }
 
     data class Student(val grade: Int)
 
@@ -102,7 +104,7 @@ class KotlinCollectionsSolutions {
     }
 
     fun `filter, upper case, then sort a list`(): List<String> =
-            listOf("a1", "a2", "b1", "c2", "c1").filter { it.startsWith('c') }.map(String::toUpperCase).sorted()
+            listOf("a1", "a2", "b1", "c2", "c1").filter { it.startsWith('c') }.map(String::uppercase).sorted()
 
     // Kotlin:
     private inline fun String?.ifPresent(thenDo: (String) -> Unit) = this?.apply { thenDo(this) }
@@ -114,10 +116,12 @@ class KotlinCollectionsSolutions {
         listOf("a1", "a2", "a3").firstOrNull().ifPresent(::println)
     }
 
-    fun `map names, join together with delimiter`(): String = persons.joinToString(" | ") { it.name.toUpperCase() }
+    fun `map names, join together with delimiter`(): String = persons.joinToString(" | ") { it.name.uppercase(
+        Locale.getDefault()
+    ) }
 
     // Kotlin:
-    inline fun Collection<Int>.summarizingInt(): SummaryStatisticsInt = this.fold(SummaryStatisticsInt()) { stats, num -> stats.accumulate(num) }
+    fun Collection<Int>.summarizingInt(): SummaryStatisticsInt = this.fold(SummaryStatisticsInt()) { stats, num -> stats.accumulate(num) }
 
     data class SummaryStatisticsInt(var count: Int = 0, var sum: Int = 0,
                                     var min: Int = Int.MAX_VALUE, var max: Int = Int.MIN_VALUE, var avg: Double = 0.0) {
