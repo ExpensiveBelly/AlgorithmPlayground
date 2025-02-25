@@ -3,7 +3,7 @@ dist: trusty
 before_install:
   - chmod +x gradlew
 jdk:
-  - oraclejdk21
+  - oraclejdk23
 
 # whitelist
 branches:
