@@ -16,15 +16,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'  # <--- Changed to Temurin (recommended)
+          java-version: '21'
+          distribution: 'temurin'
           cache: 'gradle'
 
       - name: Make gradlew executable
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew check
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: build
+
+      - name: Publish Test Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Test Reports
+          path: build/reports/tests/test
+          retention-days: 14
